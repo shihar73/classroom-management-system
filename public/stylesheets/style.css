@@ -1,0 +1,14 @@
+.arrow-position {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.fa-angle-double-left {
+    color: rgba(37, 75, 146, 0.596);
+    font-size: 25px
+}
+
+.fa-angle-double-left:hover {
+    color: blueviolet;
+}
