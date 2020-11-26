@@ -2,18 +2,17 @@ var db = require('../config/connection')
 var collection = require('../config/collections')
 var bcrypt = require('bcrypt')
 
-module.exports = {
-
-    doLogin: (tutorData) => {
+module.exports={
+    doLogin: (studentData) => {
         return new Promise(async (resolve, reject) => {
             let loginStatus = false
             let response = {}
-            let tutor = await db.get().collection(collection.TUTOR_COLLECTION).findOne({ email: tutorData.email })
-            if (tutor) {
-                bcrypt.compare(tutorData.password, tutor.password).then((status) => {
+            let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ email: studentData.email })
+            if (student) {
+                bcrypt.compare(studentData.password, student.password).then((status) => {
                     if (status) {
                         console.log('login success');
-                        response.tutor = tutor
+                        response.student = student
                         response.logStatus = true
                         resolve(response)
                     } else {

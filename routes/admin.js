@@ -2,23 +2,20 @@ var express = require('express');
 var router = express.Router();
 var adminHelper = require('../helpers/admin-helper')
 
-var adminLoggedIn = false
-var adminLoginErr = false
-
 const veifyadminLogin = (req, res, next) => {
-    if (adminLoggedIn) next()
+    if (req.session.adminLoggedIn) next()
     else res.redirect("/admin/login")
 }
 
 
 
-router.get('/', veifyadminLogin, function(req, res, next) {
+router.get('/', veifyadminLogin, function (req, res, next) {
     res.render('admin/admin')
 });
 
-router.get('/login', function(req, res, ) {
+router.get('/login', function (req, res,) {
     console.log(req.session);
-    res.render('admin/admin-login', { "loginErr": adminLoginErr })
+    res.render('admin/admin-login', { "loginErr": req.session.adminLoginErr })
 });
 
 
@@ -28,16 +25,17 @@ router.post('/login', (req, res) => {
     let pass = '123'
     if (req.body.email === email) {
         if (req.body.password === pass) {
-            adminLoggedIn = true
+            req.session.adminLoggedIn = true
+            req.session.admin = "admin"
             res.redirect('/admin')
         } else {
-            adminLoggedIn = false
-            adminLoginErr = "Invalid Password"
+            req.session.adminLoggedIn = false
+            req.session.adminLoginErr = "Invalid Password"
             res.redirect("/admin/login")
         }
     } else {
-        adminLoggedIn = false
-        adminLoginErr = "Invalid Email"
+        req.session.adminLoggedIn = false
+        req.session.adminLoginErr = "Invalid Email"
         res.redirect("/admin/login")
     }
 })
@@ -62,6 +60,12 @@ router.post('/add-student', (req, res) => {
     adminHelper.addStudent(req.body).then(() => {
         res.redirect("/admin")
     })
+})
+
+router.get('/logout', (req, res) => {
+    req.session.adminLoggedIn = false
+    req.session.admin = null
+    res.redirect("/admin/login")
 })
 
 module.exports = router;
