@@ -7,6 +7,7 @@ const verifyLogin = (req, res, next) => {
     if (req.session.tutorLoggedIn) next()
     else res.redirect("/login")
 }
+var tutorData={}
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -19,7 +20,8 @@ router.get('/', function (req, res, next) {
     }
 });
 router.get("/home", verifyLogin, (req, res) => {
-    res.render("tutor/tutor-home")
+    tutorData.login=req.session.tutorLoggedIn
+    res.render("tutor/tutor-home",{tutorData})
 })
 
 router.post('/login', (req, res) => {

@@ -12,3 +12,7 @@ $('.arrow').on('click touch', function(e) {
     }
 
 });
+
+$('.icon').click(function () {
+    $('span').toggleClass("cancel");
+  });

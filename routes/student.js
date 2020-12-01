@@ -3,10 +3,11 @@ var router = express.Router();
 var studentHelper = require('../helpers/student-helper')
 
 const verifyLogin = (req, res, next) => {
-    console.log(req.session.studentLoggedIn);
     if (req.session.studentLoggedIn) next()
     else res.redirect("/login")
 }
+
+studentData={}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,7 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home',verifyLogin,(req,res)=>{
-    res.render('student/student-home')
+    studentData.login=req.session.studentLoggedIn
+    res.render('student/student-home',{studentData})
 })
 
 router.get('/login', (req, res) => {
@@ -28,7 +30,6 @@ router.get('/login', (req, res) => {
 router.post('/login',(req,res)=>{
     studentHelper.doLogin(req.body).then((response)=>{
         if (response.logStatus) {
-            console.log(response);
             req.session.studentLoggedIn = true
             req.session.student = response.student
             res.redirect('/home')
