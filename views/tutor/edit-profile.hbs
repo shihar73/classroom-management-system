@@ -1,0 +1,90 @@
+<style>
+    .tutor-input {
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        color: rgb(82, 78, 78);
+        border: 2px solid rgba(180, 180, 180, 0.733);
+        border-radius: 12px;
+        line-height: 1.2;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 45px;
+
+        padding: 0 5px;
+    }
+</style>
+<section>
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+
+            <div class="wrapper">
+                <div class="profile-card js-profile-card">
+                    <form action="">
+                        <div>
+                            <div class="profile-card__img">
+                                <img src="/images/tutor-icon.jpeg" alt="profile card" id="tutor-pro-img">
+                            </div>
+
+                            <div class="tutor-pro-img-input">
+                                <button class="img-edit-icon" onclick="imgInput()">
+                                    <i class="fas fa-camera" style=""></i>
+                                </button>
+
+                            </div>
+                            <input type="file" name="image" id="tutor-img" onchange="viewImage(event)" hidden>
+                        </div>
+
+                        <div class="profile-card__cnt js-profile-cnt">
+                            <div class="profile-card__txt"> Name
+                                <input class="tutor-input" type="text" value="name" name="name">
+                            </div>
+
+                            <div class="profile-card__txt"> Subject
+                                <input class="tutor-input" type="text" value="Subject" name="subject">
+                            </div>
+
+                            <div class="profile-card__txt"> Class
+                                <input class="tutor-input" type="text" value="Class" name="class">
+                            </div>
+
+                            <div class="profile-card__txt"> House Name
+                                <input class="tutor-input" type="text" value="House" name="house">
+                            </div>
+                            <div class="profile-card__txt"> Place
+                                <input class="tutor-input" type="text" value="place" name="place">
+                            </div>
+
+                            <div class="profile-card__txt"> Pin
+                                <input class="tutor-input" type="number" value="58545" name="pin">
+                            </div>
+                            <div class="profile-card__txt"> MOb
+                                <input class="tutor-input" type="number" value="5658665698" name="number">
+                            </div>
+                            <div class="profile-card__txt"> Email
+                                <input class="tutor-input" type="email" value="email" name="email">
+                            </div>
+
+                            <div class="container-login100-form-btn">
+                                <input type="submit" class="save100-form-btn" value="Save">
+                                <a href="/tutor/profile" class="cancel100-form-btn">Cancel</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+</section>
+
+<script>
+    const tutorImg = document.getElementById('tutor-img');
+    function imgInput() {
+        tutorImg.click()
+    }
+    function viewImage(event) {
+        document.getElementById('tutor-pro-img').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

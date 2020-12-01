@@ -411,10 +411,6 @@ iframe {
     font-size: 16px;
     color: #555;
     line-height: 1.2;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -429,9 +425,6 @@ iframe {
     background: linear-gradient(bottom, #7579ff, #b224ef);
     position: relative;
     z-index: 1;
-    -webkit-transition: all .4s;
-    -o-transition: all .4s;
-    -moz-transition: all .4s;
     transition: all .4s
 }
 .edit100-form-btn {
@@ -440,10 +433,6 @@ iframe {
     color: rgb(245, 245, 245);
     background-color: rgb(32, 91, 219);
     line-height: 1.2;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -453,9 +442,6 @@ iframe {
     border-radius: 25px;
     position: relative;
     z-index: 1;
-    -webkit-transition: all .4s;
-    -o-transition: all .4s;
-    -moz-transition: all .4s;
     transition: all .4s
 }
 

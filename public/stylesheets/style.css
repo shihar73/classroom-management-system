@@ -38,7 +38,7 @@
         min-height: 460px;
         margin: auto;
         box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
-        background: #fff;
+        background: linear-gradient(to right, rgb(255, 255, 255), rgb(227, 224, 233));
         border-radius: 12px;
         max-width: 700px;
         position: relative;
@@ -102,4 +102,70 @@
         display: inline-flex;
         font-size: 27px;
         margin-right: 10px;
+    }
+
+    .tutor-pro-img-input {
+        width: 50px;
+        height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateY(-200%);
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        left: 41px;
+        z-index: 5;
+        background-color: rgb(42, 96, 167);
+        box-shadow: 0px 5px 50px 0px #110f13cc, 0px 0px 0px 4px rgba(130, 184, 255, 0.5);
+    }
+
+    .fa-camera {
+        color: rgb(255, 255, 255);
+        font-size: 27px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    .save100-form-btn{
+        font-family: Poppins-Medium;
+        font-size: 16px;
+        color: rgb(245, 245, 245);
+        background-color: rgb(24, 163, 94);
+        line-height: 1.2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        min-width: 120px;
+        height: 50px;
+        border-radius: 25px;
+        position: relative;
+        z-index: 1;
+        margin-right: 15px;
+        transition: all .4s
+    }
+    
+    .save100-form-btn:hover {
+        color: rgb(204, 248, 235);
+        background-color: rgb(23, 150, 18);
+    }
+    .cancel100-form-btn {
+        font-family: Poppins-Medium;
+        font-size: 16px;
+        color: rgb(245, 245, 245);
+        background-color: rgb(221, 32, 32);
+        line-height: 1.2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        min-width: 120px;
+        height: 50px;
+        border-radius: 25px;
+        position: relative;
+        z-index: 1;
+        transition: all .4s
+    }
+    .cancel100-form-btn:hover {
+        color: rgb(204, 248, 235);
+        background-color: rgb(184, 28, 28);
     }

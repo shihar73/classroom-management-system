@@ -43,6 +43,15 @@ router.get('/profile',(req,res)=>{
 res.render('tutor/tutor-profile')
 })
 
+router.get("/edit-profile",(req,res)=>{
+    res.render('tutor/edit-profile')
+})
+
+
+
+
+
+
 router.get('/logout', (req, res) => {
     req.session.tutorLoggedIn = false
     req.session.tutor = null
