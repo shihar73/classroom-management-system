@@ -39,6 +39,10 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.get('/profile',(req,res)=>{
+res.render('tutor/tutor-profile')
+})
+
 router.get('/logout', (req, res) => {
     req.session.tutorLoggedIn = false
     req.session.tutor = null
