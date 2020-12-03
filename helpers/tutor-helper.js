@@ -73,5 +73,17 @@ module.exports = {
                 resolve(data.ops[0]._id)
             })
         })
+    },
+    deleteStudent:(studentId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.STUDENT_COLLECTION).removeOne({_id:objectId(studentId)}).then((response)=>{
+                resolve(response)
+            })
+        })
     }
+
+
+
+
+
 }

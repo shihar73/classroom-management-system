@@ -95,7 +95,12 @@ router.get("/edit-student", verifyLogin, (req, res) => {
 })
 
 
-
+router.get("/delete-student/:id",verifyLogin,(req,res)=>{
+    let studentId = req.params.id
+    tutorHelper.deleteStudent(studentId).then(()=>{
+        res.redirect('/tutor/students')
+    })
+})
 
 
 router.get('/logout', (req, res) => {
