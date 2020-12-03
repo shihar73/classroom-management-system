@@ -69,8 +69,12 @@ router.get('/students', verifyLogin, (req, res) => {
     })
 })
 
-router.get('/student-profile', verifyLogin, (req, res) => {
-    res.render('tutor/student-profile')
+router.get('/student-profile/:id', verifyLogin, (req, res) => {
+    let studentId = req.params.id
+    tutorHelper.getStudentData(studentId).then((student)=>{
+
+        res.render('tutor/student-profile',{tutorData,student})
+    })
 })
 
 router.get('/add-student',verifyLogin, (req, res) => {

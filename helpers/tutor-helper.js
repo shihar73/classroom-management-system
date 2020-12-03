@@ -80,6 +80,12 @@ module.exports = {
                 resolve(response)
             })
         })
+    },
+    getStudentData:(studentId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({_id: objectId(studentId) })
+            resolve(student)
+        })
     }
 
 

@@ -24,10 +24,10 @@
             {{#each students}}
             <li class="table-row">
                 <div class="col col-1" data-label="No">
-                     <a href="/tutor/student-profile" class="sd-name">1</a>
+                     <a href="/tutor/student-profile/{{this._id}}" class="sd-name">{{this.no}}</a>
                 </div>
                 <div class="col col-2" data-label="Name">
-                   <a href="/tutor/student-profile" class="sd-name">{{this.name}}</a>
+                   <a href="/tutor/student-profile/{{this._id}}" class="sd-name">{{this.name}}</a>
                     </div>
                 <div class="col col-3" data-label=""></div>
                 <div class="col col-4" data-label="">
