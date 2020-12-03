@@ -2,22 +2,22 @@
     <div class="limiter">
         <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
             <div class="arrow-position">
-                <a href="/"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
+                <a href="/tutor"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
             </div>
             <div class="wrapper">
                 <div class="profile-card js-profile-card">
                     <div class="profile-card__img">
-                        <img src="/images/tutor-icon.jpeg" alt="profile card">
+                        <img src="/images/tutor-profile-img/{{tutorData.tutor._id}}.jpg" alt="profile card">
                     </div>
 
                     <div class="profile-card__cnt js-profile-cnt">
-                        <div class="profile-card__name">Muhammed Erdem</div>
+                        <div class="profile-card__name">{{tutorData.tutor.name}}</div>
                         <hr>
-                        <div class="profile-card__txt"><strong>English</strong> Teacher</div>
-                        <div class="profile-card__txt"><span style='font-size:14px'>Class : </span><strong>SCE</strong>
+                        <div class="profile-card__txt"><strong>{{tutorData.tutor.subject}}</strong> Teacher</div>
+                        <div class="profile-card__txt"><span style='font-size:14px'>Class : </span><strong>{{tutorData.tutor.class}}</strong>
                         </div>
                         <hr>
-                        <div class="profile-card__txt"><strong>Kalody</strong> House</div>
+                        <div class="profile-card__txt"><strong>{{tutorData.tutor.house}}</strong> House</div>
                         <div class="profile-card-loc">
                             <span class="profile-card-loc__icon">
                                 <svg class="icon">
@@ -26,16 +26,16 @@
                             </span>
 
                             <span class="profile-card-loc__txt" data-placeholder="&#xf191;">
-                                Istanbul, Turkey
+                                {{tutorData.tutor.place}}
                             </span>
                         </div>
-                        <div class="profile-card__txt"><span style='font-size:14px'>Pin: </span>658698</div>
+                        <div class="profile-card__txt"><span style='font-size:14px'>Pin: </span>{{tutorData.tutor.pin}}</div>
 
                             <br>
                             <div class="profile-card__txt"><span style='font-size:14px'>Mob :
-                                </span><strong>9656983933</strong></div>
+                                </span><strong>{{tutorData.tutor.number}}</strong></div>
                             <div class="profile-card__txt"><span style='font-size:14px'>Email :
-                                </span><strong>sdsaf@gmail.com</strong></div>
+                                </span><strong>{{tutorData.tutor.email}}</strong></div>
                             <br>
                             <div class="container-login100-form-btn">
                                 <a href="/tutor/edit-profile" class="edit100-form-btn">Edit</a>

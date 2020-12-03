@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session=require('express-session')
 var hbs=require('express-handlebars')
+var fileUpload=require('express-fileupload')
 
 var studentRouter = require('./routes/student');
 var tutorRouter = require('./routes/tutor');
@@ -31,7 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:"Key",cookie:{maxAge:60000000}}))
-
+app.use(fileUpload())
 
 db.connect((err) => {
     if (err) console.log("Connecton err" + err);

@@ -5,9 +5,9 @@ var tutorHelper = require('../helpers/tutor-helper')
 
 const verifyLogin = (req, res, next) => {
     if (req.session.tutorLoggedIn) next()
-    else res.redirect("/login")
+    else res.redirect("/tutor")
 }
-var tutorData={}
+var tutorData = {}
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -20,33 +20,79 @@ router.get('/', function (req, res, next) {
     }
 });
 router.get("/home", verifyLogin, (req, res) => {
-    tutorData.login=req.session.tutorLoggedIn
-    res.render("tutor/tutor-home",{tutorData})
+    tutorData.login = req.session.tutorLoggedIn
+    res.render("tutor/tutor-home", { tutorData })
 })
 
 router.post('/login', (req, res) => {
     tutorHelper.doLogin(req.body).then((response) => {
         if (response.logStatus) {
-            console.log(response);
             req.session.tutorLoggedIn = true
             req.session.tutor = response.tutor
             res.redirect('/tutor/home')
         } else {
-            console.log(response);
             req.session.tutorloginErr = response.loginErr
             res.redirect("/tutor")
         }
     })
 })
 
-router.get('/profile',(req,res)=>{
-res.render('tutor/tutor-profile')
+router.get('/profile', verifyLogin, async (req, res) => {
+    tutorData.login = req.session.tutorLoggedIn
+    tutorData.tutor = await tutorHelper.getTutorData(req.session.tutor._id)
+    res.render('tutor/tutor-profile', { tutorData })
 })
 
-router.get("/edit-profile",(req,res)=>{
-    res.render('tutor/edit-profile')
+router.get("/edit-profile", verifyLogin, async (req, res) => {
+    tutorData.login = false
+    tutorData.tutor = await tutorHelper.getTutorData(req.session.tutor._id)
+    console.log(tutorData);
+    res.render('tutor/edit-profile', { tutorData })
 })
 
+router.post('/edit-profile', (req, res) => {
+
+    let id = req.session.tutor._id
+    tutorHelper.editData(id, req.body).then(() => {
+        res.redirect("/tutor/profile")
+        if (req.files.image) {
+            let image = req.files.image
+            image.mv('./public/images/tutor-profile-img/' + id + ".jpg")
+        }
+    })
+})
+
+router.get('/students', verifyLogin, (req, res) => {
+    tutorHelper.getStudents().then((students) => {
+        console.log(students);
+        res.render('tutor/students-list', { tutorData, students })
+    })
+})
+
+router.get('/student-profile', verifyLogin, (req, res) => {
+    res.render('tutor/student-profile')
+})
+
+router.get('/add-student',verifyLogin, (req, res) => {
+    res.render('tutor/add-student')
+})
+
+router.post('/add-student', (req, res) => {
+    tutorHelper.addStudent(req.body).then((id) => {
+        res.redirect('/tutor/students')
+        if (req.files && req.files.image) {
+            let image = req.files.image
+            image.mv('./public/images/students-profile/' + id + ".jpg")
+        }
+
+
+    })
+})
+
+
+router.get("/edit-student", verifyLogin, (req, res) => {
+    res.render('tutor/edit-student')
+})
 
 
 

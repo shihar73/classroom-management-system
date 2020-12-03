@@ -1,7 +1,13 @@
 .arrow-position {
     position: fixed;
-    top: 10px;
+    top: 80px;
     left: 10px;
+    z-index: 9;
+}
+@media(max-width: 767px) {
+    .arrow-position{
+        display: none;
+    }
 }
 
 .fa-angle-double-left {
@@ -10,7 +16,7 @@
 }
 
 .fa-angle-double-left:hover {
-    color: blueviolet;
+    color: rgb(136, 43, 223);
 }
 
     .wrapper {
@@ -168,4 +174,159 @@
     .cancel100-form-btn:hover {
         color: rgb(204, 248, 235);
         background-color: rgb(184, 28, 28);
+    }
+    .tutor-input {
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        color: rgb(82, 78, 78);
+        border: 2px solid rgba(180, 180, 180, 0.733);
+        border-radius: 12px;
+        line-height: 1.2;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 45px;
+
+        padding: 0 5px;
+    }
+
+    .error {
+        font-size: 13px;
+        color: red;
+    }
+
+/* students list table */
+
+    .table {
+        font-family: 'lato', sans-serif;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 20px;
+
+    }
+
+    .h2-table {
+        font-size: 26px;
+
+        text-align: center;
+    }
+
+
+    .responsive-table {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .responsive-table li {
+        border-radius: 3px;
+        padding: 25px 30px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    .responsive-table .table-header {
+        background-color: rgb(104, 73, 190);
+        color: #ffffff;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .responsive-table .table-row {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .responsive-table .col-1 {
+        flex-basis: 10%;
+        max-width: 25.667%;
+    }
+
+    .responsive-table .col-2 {
+        flex-basis: 40%;
+        max-width: 35.667%;
+    }
+
+    .responsive-table .col-3 {
+        max-width: 8.667%;
+        flex-basis: 25%;
+    }
+
+    .responsive-table .col-4 {
+        flex-basis: 25%;
+        max-width: 28.667%;
+    }
+
+    @media all and (max-width: 767px) {
+        .h2-table {
+          margin-bottom: 10px;
+        }
+
+        .responsive-table .table-header {
+            display: none;
+        }
+
+        .responsive-table li {
+            display: block;
+        }
+
+        .responsive-table .col {
+            flex-basis: 100%;
+        }
+
+        .responsive-table .col {
+            display: flex;
+            padding: 10px 0;
+        }
+
+        .responsive-table .col:before {
+            color: #6C7A89;
+            padding-right: 10px;
+            content: attr(data-label);
+            flex-basis: 50%;
+            text-align: right;
+        }
+    }
+
+    .fa-trash {
+        color: rgb(228, 76, 65);
+        font-size: 27px;
+        margin-left: 25px;
+    }
+
+    .fa-trash:hover {
+        color: rgb(252, 47, 32);
+        font-size: 29px;
+    }
+
+    .fa-edit {
+        color: rgb(51, 125, 185);
+        font-size: 27px;
+    }
+
+    .fa-edit:hover {
+        color: rgb(20, 114, 255);
+        font-size: 29px;
+    }
+    .add-sd {
+        background-color: rgb(70, 115, 238);
+        color: rgb(255, 255, 255);
+        
+    }
+
+    .add-sd:hover {
+         background-color: rgb(27, 0, 177);
+        color: rgb(224, 244, 245);
+        
+    }
+    .sd-name:hover{
+        color: rgb(70, 115, 238);
+        font-size: 16px;
     }
