@@ -4,10 +4,10 @@
 
             <div class="wrapper">
                 <div class="profile-card js-profile-card">
-                    <form id="tutorFormEdit" action="/tutor/edit-profile" method="POST" enctype="multipart/form-data">
+                    <form id="tutorFormEdit" action="/tutor/edit-student/{{student._id}}" method="POST" enctype="multipart/form-data">
                         <div>
                             <div class="profile-card__img">
-                                <img src="/images/tutor-profile-img/{{tutorData.tutor._id}}.jpg" alt="profile card"
+                                <img src="/images/students-profile/{{student._id}}.jpg" alt="profile card"
                                     id="tutor-pro-img">
                             </div>
 
@@ -22,33 +22,36 @@
 
                         <div class="profile-card__cnt js-profile-cnt">
                             <div class="profile-card__txt"> Name
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.name}}" name="name">
-                            </div>
-
-                            <div class="profile-card__txt"> Subject
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.subject}}"
-                                    name="subject">
+                                <input class="tutor-input" type="text" value="{{student.name}}" name="name">
                             </div>
 
                             <div class="profile-card__txt"> Class
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.class}}" name="class">
+                                <input class="tutor-input" type="text" value="{{student.class}}" name="class">
+                            </div>
+
+                            <div class="profile-card__txt"> Roll No
+                                <input class="tutor-input" type="text" value="{{student.no}}"
+                                    name="no">
                             </div>
 
                             <div class="profile-card__txt"> House Name
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.house}}" name="house">
+                                <input class="tutor-input" type="text" value="{{student.house}}" name="house">
                             </div>
                             <div class="profile-card__txt"> Place
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.place}}" name="place">
+                                <input class="tutor-input" type="text" value="{{student.place}}" name="place">
                             </div>
 
                             <div class="profile-card__txt"> Pin
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.pin}}" name="pin">
+                                <input class="tutor-input" type="text" value="{{student.pin}}" name="pin">
                             </div>
                             <div class="profile-card__txt"> MOb
-                                <input class="tutor-input" type="text" value="{{tutorData.tutor.number}}" name="number">
+                                <input class="tutor-input" type="text" value="{{student.number}}" name="number">
                             </div>
                             <div class="profile-card__txt"> Email
-                                <input class="tutor-input" type="email" value="{{tutorData.tutor.email}}" name="email">
+                                <input class="tutor-input" type="email" value="{{student.email}}" name="email">
+                            </div>
+                            <div class="profile-card__txt"> Password
+                                <input class="tutor-input" type="text" value="" name="password">
                             </div>
 
                             <div class="container-login100-form-btn">

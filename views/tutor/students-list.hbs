@@ -1,12 +1,12 @@
 <style>
 
 </style>
+
+<section class="session1">
+    <div class="container ">
 <div class="arrow-position">
     <a href="/tutor"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
 </div>
-
-<section class="table">
-    <div class="container ">
         <div style="text-align: end;">
             <h2 class="h2-table">Students Details</h2>
 
@@ -31,7 +31,7 @@
                     </div>
                 <div class="col col-3" data-label=""></div>
                 <div class="col col-4" data-label="">
-                    <a href="/tutor/edit-student"><i class='fas fa-edit'></i></a>
+                    <a href="/tutor/edit-student/{{this._id}}"><i class='fas fa-edit'></i></a>
                     <a href="/tutor/delete-student/{{this._id}}" onclick="return confirm('Do you want delete {{this.name}}?')"><i
                             class='fas fa-trash '></i></a>
                 </div>

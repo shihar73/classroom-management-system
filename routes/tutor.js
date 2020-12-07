@@ -94,8 +94,26 @@ router.post('/add-student', (req, res) => {
 })
 
 
-router.get("/edit-student", verifyLogin, (req, res) => {
-    res.render('tutor/edit-student')
+router.get("/edit-student/:id", verifyLogin, (req, res) => {
+
+    let studentId = req.params.id
+    tutorHelper.getStudentData(studentId).then((student)=>{
+
+        res.render('tutor/edit-student',{student})
+    })
+})
+
+router.post("/edit-student/:id",(req,res)=>{
+    let Id = req.params.id
+    tutorHelper.editStudent(Id,req.body).then(()=>{
+
+        res.redirect('/tutor/student-profile/'+Id)
+
+        if (req.files && req.files.image) {
+            let image = req.files.image
+            image.mv('./public/images/students-profile/' + Id + ".jpg")
+        }
+    })
 })
 
 
@@ -114,3 +132,6 @@ router.get('/logout', (req, res) => {
 })
 
 module.exports = router;
+
+
+//+12058904741
