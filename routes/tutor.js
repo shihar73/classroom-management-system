@@ -160,10 +160,28 @@ router.get("/doc/:id", (req, res) => {
     res.render('doc/doc', { Id })
 })
 
+router.get("/delete-assignment/:id", verifyLogin, (req, res) => {
+    let Id = req.params.id
+    tutorHelper.deleteAssignment(Id).then(() => {
+        res.redirect('/tutor/assignments')
+    })
+})
 
+router.get("/students-assignments/:id", verifyLogin, (req, res) => {
+    let Id = req.params.id
+    tutorHelper.getStudentAssignment(Id).then((data) => {
+        data.Id=Id
+        res.render('tutor/student-assignments', { data,tutorData })
+    })
+})
+router.post("/save-assignments-mark/:id",(req,res)=>{
+   let studentId=req.body.studentId
+   let Id = req.params.id
+    tutorHelper.markAssignment(Id,req.body).then(() => {
+        res.redirect('/tutor/students-assignments/'+studentId)
+    })
+})
 
 
 module.exports = router;
 
-
-//+12058904741

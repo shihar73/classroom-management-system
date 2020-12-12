@@ -4,17 +4,18 @@
         <div class="arrow-position">
             <a href="/"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
         </div>
-        <div>
+        {{!-- <div>
             <a href=" " class="btn btn-primary">My Assignments</a>
-        </div>
+        </div> --}}
         <div style="row">
             <div class="upload-button-wrap input-group ">
-                <form class="upload-button-wrap" action="" method="POST" enctype="multipart/form-data" style="padding-left: 30%; width:100%;">
+                <form class="upload-button-wrap" action="/add-assignment" method="POST" enctype="multipart/form-data" style="padding-left: 30%; width:100%;">
                     <label for="">Topic</label>
                 <input type="text" name="topic" style="display: block; height: 2.5rem;border: 3px solid;border-color: #1a015129;" placeholder="Topic"><br>
                 <label class="upload-button" for="upload">File</label><br>
                 <input name="doc" id="upload" type="file" onclick="viewDoc(event)">
                 <input type="submit" class="save100-form-btn ml-5" value="save">
+                <input type="text" name="studentId" value="{{studentData.student._id}}" hidden>
                 </form>
             </div>
         </div>
@@ -28,21 +29,26 @@
 
         <ul class="responsive-table table-num">
             <li class="table-header">
-                <div class="col col-1">No</div>
-                <div class="col col-2">Topic</div>
-                <div class="col col-3">Document</div>
-                <div class="col col-4"></div>
+                <div class="col col-1" style="max-width: 10%;">No</div>
+                <div class="col col-2" style="max-width: 30%;">Topic</div>
+                <div class="col col-3" style="max-width: 30%;">Document</div>
+                <div class="col col-3" style="max-width: 15%;">Mark</div>
+                <div class="col col-4" style="max-width: 15%;">Action</div>
             </li>
             {{#each data}}
-            <li class="table-row" id="num">
-                <div class="col col-1" data-label="No">
-                    <p class="sd-name" id=""></p>
+            <li class="table-row" >
+                <div class="col col-1" data-label="No" style="max-width: 10%;">
+                    <p class="sd-name" id="num"></p>
                 </div>
-                <div class="col col-2" data-label="Name">
+                <div class="col col-2" data-label="Name" style="max-width: 30%;">
                     <a href="" class="sd-name">{{this.topic}}</a>
                 </div>
-                <div class="col col-3" data-label="" style="max-width: 30.667%;"><a href="/tutor/doc/{{this._id}}"><i class="fa fa-file-pdf-o"></i></a></div>
-                <div class="col col-4" data-label="" style="max-width: 13.667%;"> </div>
+                <div class="col col-3" data-label="" style="max-width: 30%;"><a href="/tutor/doc/{{this._id}}"><i class="fa fa-file-pdf-o"></i></a></div>
+                <div class="col col-3" data-label="" style="max-width: 15%;">{{this.mark}}</div>
+                <div class="col col-4" data-label="" style="max-width: 15%;">
+                    <a href="/delete-assignments/{{this._id}}"
+                        onclick="return confirm('Do you want delete {{this.topic}}?')"><i class='fas fa-trash '></i></a>
+                </div>
             </li>
             {{/each}}
         </ul>

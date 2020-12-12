@@ -1,0 +1,41 @@
+<section class="session1">
+    <div class="container ">
+        <div class="arrow-position">
+            <a href="/tutor/student-profile/{{data.Id}}"><i class='fas fa-angle-double-left '
+                    style='font-size:25px'></i></a>
+        </div>
+        <div>
+            <h2 class="h2-table">Assignments</h2>
+        </div>
+
+        <ul class="responsive-table table-num">
+            <li class="table-header">
+                <div class="col col-1" style="max-width: 10%;">No</div>
+                <div class="col col-2" style="max-width: 30%;">Topic</div>
+                <div class="col col-3" style="max-width: 30%;">Document</div>
+                <div class="col col-3" style="max-width: 15%;">Mark</div>
+                <div class="col col-4" style="max-width: 15%;">Action</div>
+            </li>
+            {{#each data}}
+            <form action="/tutor/save-assignments-mark/{{this._id}}" method="POST">
+                <input type="text" name="studentId" value="{{this.studentId}}">
+                <li class="table-row">
+                    <div class="col col-1" data-label="No" style="max-width: 10%;">
+                        <p class="sd-name" id="num"></p>
+                    </div>
+                    <div class="col col-2" data-label="Name" style="max-width: 30%;">
+                        <a href="" class="sd-name">{{this.topic}}</a>
+                    </div>
+                    <div class="col col-3" data-label="" style="max-width: 30%;"><a href="/tutor/doc/{{this._id}}"><i
+                                class="fa fa-file-pdf-o"></i></a></div>
+                    <div class="col col-3" data-label="" style="max-width: 15%;"><input type="number" name="mark"
+                            value="{{this.mark}}" style="display: block;width: 80px;height: 50px;"></div>
+                    <div class="col col-4" data-label="" style="max-width: 15%;">
+                        <input type="submit" class="save100-form-btn" value="save" style="display:">
+                    </div>
+                </li>
+            </form>
+            {{/each}}
+        </ul>
+    </div>
+</section>

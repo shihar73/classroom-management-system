@@ -88,27 +88,27 @@ module.exports = {
         })
     },
     editStudent: (Id, data) => {
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             if (data.password) {
-                
+
                 data.password = await bcrypt.hash(data.password, 10)
-                
-                    db.get().collection(collection.STUDENT_COLLECTION).updateOne({_id:objectId(Id)},{
-                        $set:{
-                            name:data.name,
-                            no:data.no,
-                            class:data.class,
-                            house:data.house,
-                            place:data.place,
-                            pin:data.pin,
-                            number:data.number,
-                            email:data.email,
-                            password:data.password
-                        }
-                    }).then((response)=>{
-                        resolve()
-                    })
-                
+
+                db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: objectId(Id) }, {
+                    $set: {
+                        name: data.name,
+                        no: data.no,
+                        class: data.class,
+                        house: data.house,
+                        place: data.place,
+                        pin: data.pin,
+                        number: data.number,
+                        email: data.email,
+                        password: data.password
+                    }
+                }).then((response) => {
+                    resolve()
+                })
+
 
             } else {
 
@@ -129,8 +129,8 @@ module.exports = {
             }
         })
     },
-    addAssignmet:(topic)=>{
-        return new Promise((resolve,reject)=>{
+    addAssignmet: (topic) => {
+        return new Promise((resolve, reject) => {
             db.get().collection(collection.ASSIGNMENT_COLLECTION).insertOne(topic).then((data) => {
                 console.log(data.ops[0]);
                 resolve(data.ops[0])
@@ -138,12 +138,37 @@ module.exports = {
         })
 
     },
-    getAssignment:()=>{
-            return new Promise(async (resolve, reject) => {
-                let data = await db.get().collection(collection.ASSIGNMENT_COLLECTION).find().toArray()
-                resolve(data)
+    getAssignment: () => {
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.ASSIGNMENT_COLLECTION).find().toArray()
+            resolve(data)
+        })
+
+    },
+    deleteAssignment: (Id) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ASSIGNMENT_COLLECTION).removeOne({ _id: objectId(Id) }).then((response) => {
+                resolve()
             })
-        
+        })
+    },
+    getStudentAssignment: (Id) => {
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.STUDENT_ASSIGNMENT_COLLECTION).find({ studentId: Id }).toArray()
+            resolve(data)
+        })
+    },
+    markAssignment: (Id, data) => {
+        return new Promise((resolve,reject)=>{
+
+            db.get().collection(collection.STUDENT_ASSIGNMENT_COLLECTION).updateOne({ _id: objectId(Id) }, {
+                $set: {
+                    mark: data.mark
+                }
+            }).then(() => {
+                resolve()
+            })
+        })
     }
 
 
@@ -151,3 +176,8 @@ module.exports = {
 
 
 }
+
+
+
+
+

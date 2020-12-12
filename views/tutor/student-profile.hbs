@@ -13,8 +13,10 @@
                     <div class="profile-card__cnt js-profile-cnt">
                         <div class="profile-card__name">{{student.name}}</div>
                         <hr>
-                        <div class="profile-card__txt"><span style='font-size:14px'>Class : </span><strong>{{student.class}}</strong> </div>
-                        <div class="profile-card__txt"><span style='font-size:14px'>Roll No : </span><strong>{{student.no}}</strong>
+                        <div class="profile-card__txt"><span style='font-size:14px'>Class :
+                            </span><strong>{{student.class}}</strong> </div>
+                        <div class="profile-card__txt"><span style='font-size:14px'>Roll No :
+                            </span><strong>{{student.no}}</strong>
                         </div>
                         <hr>
                         <div class="profile-card__txt"><strong>{{student.house}}</strong> House</div>
@@ -31,20 +33,25 @@
                         </div>
                         <div class="profile-card__txt"><span style='font-size:14px'>Pin: </span>{{student.pin}}</div>
 
-                            <br>
-                            <div class="profile-card__txt"><span style='font-size:14px'>Mob :
-                                </span><strong>{{student.number}}</strong></div>
-                            <div class="profile-card__txt"><span style='font-size:14px'>Email :
-                                </span><strong>{{student.email}}</strong></div>
-                            <br>
-                            <div class="container-login100-form-btn">
-                                <a href="/tutor/edit-student/{{student._id}}" class="edit100-form-btn">Edit</a>
-                            </div>
-
+                        <br>
+                        <div class="profile-card__txt"><span style='font-size:14px'>Mob :
+                            </span><strong>{{student.number}}</strong></div>
+                        <div class="profile-card__txt"><span style='font-size:14px'>Email :
+                            </span><strong>{{student.email}}</strong></div>
+                        <br>
+                        <div class="container-login100-form-btn">
+                            <a href="/tutor//students-assignments/{{student._id}}" class="cancel100-form-btn">Assignments</a>
+                            <a href="" class="cancel100-form-btn">Exams</a>
                         </div>
+                        <br>
+                        <div class="container-login100-form-btn">
+                            <a href="/tutor/edit-student/{{student._id}}" class="edit100-form-btn">Edit</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div id="dropDownSelect1"></div>
+    </div>
+    <div id="dropDownSelect1"></div>
 </section>

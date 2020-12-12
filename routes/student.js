@@ -43,6 +43,7 @@ router.post('/login', (req, res) => {
         } else {
             req.session.studentloginErr = response.loginErr
             res.redirect("/login")
+            req.session.studentLoggedIn = false
         }
     })
 })
@@ -83,12 +84,26 @@ router.get('/logout', (req, res) => {
 })
 
 router.get("/assignments", verifyLogin, (req, res) => {
-    console.log("dfasdfadsafsaSDFERHGTEGVFSDGBBFHF");
-    studentHelper.getAssignment().then((data) => {
-
+    studentHelper.getAssignment(req.session.student._id).then((data) => {
         res.render('student/assignment', { data, studentData })
     })
 })
+
+
+router.post('/add-assignment', (req, res) => {
+    studentHelper.addAssignmet(req.body).then((data) => {
+        res.redirect('/assignments')
+        if (req.files && req.files.doc) {
+            let doc = req.files.doc
+
+            doc.mv('./public/doc/student-assignments/' + data._id+ ".pdf")
+        }
+
+
+    })
+})
+
+
 
 
 module.exports = router;
