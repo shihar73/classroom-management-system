@@ -128,6 +128,22 @@ module.exports = {
                 })
             }
         })
+    },
+    addAssignmet:(topic)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.ASSIGNMENT_COLLECTION).insertOne(topic).then((data) => {
+                console.log(data.ops[0]);
+                resolve(data.ops[0])
+            })
+        })
+
+    },
+    getAssignment:()=>{
+            return new Promise(async (resolve, reject) => {
+                let data = await db.get().collection(collection.ASSIGNMENT_COLLECTION).find().toArray()
+                resolve(data)
+            })
+        
     }
 
 

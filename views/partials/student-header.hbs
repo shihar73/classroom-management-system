@@ -9,37 +9,28 @@
     <input type="checkbox" id="btn">
     <ul>
       <li><a href="#">Home</a></li>
+      <li><a href="#">Today's Task</a></li>
+      <li><a href="#">Attendance</a></li>
       <li>
-        <label for="btn-1" class="show">students +</label>
-        <a href="#"></a>
+        <label for="btn-1" class="show">Publishs +</label>
+        <a href="#">Publishs</a>
         <input type="checkbox" id="btn-1">
         <ul>
-          <li><a href="#">Pages</a></li>
-          <li><a href="#">Elements</a></li>
-          <li><a href="#">icons</a></li>
+          <li><a href="/assignments">Assignments</a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="#">Nots</a></li>
         </ul>
       </li>
       <li>
-        <label for="btn-2" class="show">Services +</label>
-        <a href="#">Services</a>
+        <label for="btn-2" class="show">{{studentData.student.name}} +</label>
+        <a href="#">{{studentData.student.name}}</a>
         <input type="checkbox" id="btn-2">
         <ul>
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">App Design</a></li>
-          <li>
-            <label for="btn-3" class="show">More +</label>
-            <a href="#">More <span class="fa fa-plus"></span></a>
-            <input type="checkbox" id="btn-3">
-            <ul>
-              <li><a href="#">Submenu-1</a></li>
-              <li><a href="#">Submenu-2</a></li>
-              <li><a href="#">Submenu-3</a></li>
-            </ul>
-          </li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="/logout" class="btn btn-danger ml-4 mb-2">Logout</a></li>
+          
         </ul>
       </li>
-      <li><a href="#">Portfolio</a></li>
-      <li><a href="#">Contact</a></li>
     </ul>
   </div>
   </nav>

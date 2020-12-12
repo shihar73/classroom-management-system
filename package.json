@@ -17,6 +17,7 @@
     "http-errors": "~1.6.3",
     "mongodb": "^3.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "unirest": "^0.6.0"
   }
 }

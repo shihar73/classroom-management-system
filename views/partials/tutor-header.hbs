@@ -23,7 +23,7 @@
         <a href="#">Publish</a>
         <input type="checkbox" id="btn-2">
         <ul>
-          <li><a href="#">Assignments</a></li>
+          <li><a href="/tutor/assignments">Assignments</a></li>
           <li><a href="#">Notes</a></li>
         </ul>
       </li>
@@ -37,7 +37,17 @@
           <li><a href="#">Photos</a></li>
         </ul>
       </li>
+      <li>
+        <label for="btn-3" class="show">{{tutorData.tutor.name}} +</label>
+        <a href="#">{{tutorData.tutor.name}}</a>
+        <input type="checkbox" id="btn-3">
+        <ul>
       <li><a href="/tutor/profile">Profile</a></li>
+          <li><a href="/tutor/logout" class="btn btn-danger ml-4 mb-2">Logout</a></li>
+          
+          
+        </ul>
+      </li>
     </ul>
   </nav>
 </header>

@@ -20,6 +20,7 @@ router.get('/', function (req, res, next) {
     }
 });
 router.get("/home", verifyLogin, (req, res) => {
+    console.log(tutorData);
     tutorData.login = req.session.tutorLoggedIn
     res.render("tutor/tutor-home", { tutorData })
 })
@@ -29,6 +30,7 @@ router.post('/login', (req, res) => {
         if (response.logStatus) {
             req.session.tutorLoggedIn = true
             req.session.tutor = response.tutor
+            tutorData.tutor = response.tutor
             res.redirect('/tutor/home')
         } else {
             req.session.tutorloginErr = response.loginErr
@@ -71,13 +73,13 @@ router.get('/students', verifyLogin, (req, res) => {
 
 router.get('/student-profile/:id', verifyLogin, (req, res) => {
     let studentId = req.params.id
-    tutorHelper.getStudentData(studentId).then((student)=>{
+    tutorHelper.getStudentData(studentId).then((student) => {
 
-        res.render('tutor/student-profile',{tutorData,student})
+        res.render('tutor/student-profile', { tutorData, student })
     })
 })
 
-router.get('/add-student',verifyLogin, (req, res) => {
+router.get('/add-student', verifyLogin, (req, res) => {
     res.render('tutor/add-student')
 })
 
@@ -97,17 +99,17 @@ router.post('/add-student', (req, res) => {
 router.get("/edit-student/:id", verifyLogin, (req, res) => {
 
     let studentId = req.params.id
-    tutorHelper.getStudentData(studentId).then((student)=>{
+    tutorHelper.getStudentData(studentId).then((student) => {
 
-        res.render('tutor/edit-student',{student})
+        res.render('tutor/edit-student', { student })
     })
 })
 
-router.post("/edit-student/:id",(req,res)=>{
+router.post("/edit-student/:id", (req, res) => {
     let Id = req.params.id
-    tutorHelper.editStudent(Id,req.body).then(()=>{
+    tutorHelper.editStudent(Id, req.body).then(() => {
 
-        res.redirect('/tutor/student-profile/'+Id)
+        res.redirect('/tutor/student-profile/' + Id)
 
         if (req.files && req.files.image) {
             let image = req.files.image
@@ -117,9 +119,9 @@ router.post("/edit-student/:id",(req,res)=>{
 })
 
 
-router.get("/delete-student/:id",verifyLogin,(req,res)=>{
+router.get("/delete-student/:id", verifyLogin, (req, res) => {
     let studentId = req.params.id
-    tutorHelper.deleteStudent(studentId).then(()=>{
+    tutorHelper.deleteStudent(studentId).then(() => {
         res.redirect('/tutor/students')
     })
 })
@@ -130,6 +132,36 @@ router.get('/logout', (req, res) => {
     req.session.tutor = null
     res.redirect('/')
 })
+
+router.get("/assignments", verifyLogin, (req, res) => {
+    console.log("dfasdfadsafsaSDFERHGTEGVFSDGBBFHF");
+    tutorHelper.getAssignment().then((data) => {
+
+        res.render('tutor/tutor-assignment', { data,tutorData })
+    })
+})
+
+router.post('/add-assignment', (req, res) => {
+    tutorHelper.addAssignmet(req.body).then((data) => {
+        res.redirect('/tutor/assignments')
+        if (req.files && req.files.doc) {
+            let doc = req.files.doc
+
+            doc.mv('./public/doc/assignments/' + data._id+ ".pdf")
+        }
+
+
+    })
+})
+
+
+router.get("/doc/:id", (req, res) => {
+    var Id = req.params.id
+    res.render('doc/doc', { Id })
+})
+
+
+
 
 module.exports = router;
 

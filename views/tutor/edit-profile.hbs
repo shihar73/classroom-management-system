@@ -74,6 +74,7 @@
         tutorImg.click()
     }
     function viewImage(event) {
+        console.log(event)
         document.getElementById('tutor-pro-img').src = URL.createObjectURL(event.target.files[0])
     }
 
