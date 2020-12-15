@@ -1,0 +1,150 @@
+<style>
+    .note-sm-img{
+        width: 60px;
+        height: 60px;
+        
+    }
+    .note-sm-img:hover{
+        width: 62px;
+        height: 62px;
+       
+    }
+</style>
+
+<section class="session1">
+    <div class="container ">
+        <div class="arrow-position">
+            <a href="/tutor"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
+        </div>
+        <div style="row">
+            <div class="upload-button-wrap input-group" id="not-uplode">
+                <form class="upload-button-wrap" action="/tutor/add-notes" method="POST" enctype="multipart/form-data"
+                    style="padding-left: 30%; width:100%;">
+                    <label for="">Topic</label>
+                    <input type="text" name="topic"
+                        style="display: block; height: 2.5rem;border: 3px solid;border-color: #1a015129;"
+                        placeholder="Topic"><br>
+
+                    <input onclick="changeFile()" type="radio" id="upload" name="media" value="image"
+                        style="display: block; float: left;">
+                    <label for="male"> image</label>
+                    <input onclick="changeFile()" type="radio" id="upload" name="media" value="video"
+                        style="display: block;float: left;">
+                    <label for="female"> Video</label>
+                    <input onclick="changeFile()" type="radio" id="upload" name="media" value="doc"
+                        style="display: block;float: left;">
+                    <label for="other"> Document</label>
+                    <input onclick="changeUrl()" type="radio" id="other" name="media" value="youtube"
+                        style="display: block;float: left;">
+                    <label for="other"> Youtube</label><br>
+
+
+                    <input id="note-file-upload" type="file" name="file">
+                    <input id="note-url-upload" type="url" name="url"
+                        style=" height: 2.5rem;border: 3px solid;border-color: #1a015129;">
+                    <br>
+                    <input type="submit" class="save100-form-btn ml-5" value="save">
+                </form>
+
+
+
+
+            </div>
+        </div>
+        <hr>
+        <br>
+        <br>
+
+        <div>
+            <h2 class="h2-table">Nots</h2>
+        </div>
+        <ul class="responsive-table table-num">
+            <li class="table-header">
+                <div class="col col-1" style="max-width: 10%;">No</div>
+                <div class="col col-2" style="max-width: 35%;">Topic</div>
+                <div class="col col-3" style="max-width: 35%;">Document</div>
+                <div class="col col-4" style="max-width: 20%;">Delete</div>
+            </li>
+            {{#each data}}
+            <li class="table-row" id="num" >
+                <div class="col col-2" data-label="Name" style="max-width: 35%;">
+                    <a href="" class="sd-name">{{this.topic}}</a>
+                </div>
+                {{#iff this.media 'doc'}}
+
+                <div class="col col-3" data-label="" style="max-width: 35%;">
+                    <a href="/tutor/doc/{{../_id}}">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </a>
+                </div>
+                {{/iff}}
+
+                {{#iff this.media 'image'}}
+                <div class="col col-3" data-label="" style="max-width: 35%;">
+                    <a href="/tutor//{{this._id}}">
+                        <img src="/images/notes/{{.._id}}.jpg" alt="image" class="note-sm-img">
+                    </a>
+                </div>
+                {{/iff}}
+
+                {{#iff this.media 'video'}}
+                <div class="col col-3" data-label="" style="max-width: 35%;">
+                    <a href="/tutor/doc/{{this._id}}">
+                        <i class="fa fa-file-video-o"></i>
+                    </a>
+                </div>
+                {{/iff}}
+
+                 {{#iff this.media 'youtube'}}
+                <div class="col col-3" data-label="" style="max-width: 35%;">
+                    <a href="{{../url}}">
+                    <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
+                    </a>
+                </div>
+                {{/iff}}
+
+                <div class="col col-4" data-label="" style="max-width: 20%;">
+                    <a href="/tutor/delete-assignment/{{this._id}}"
+                        onclick="return confirm('Do you want delete {{this.topic}}?')"><i class='fas fa-trash '></i>
+                    </a>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</section>
+<script>
+
+
+
+
+
+
+
+    function getId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+    }
+
+    const videoId = getId('http://www.youtube.com/watch?v=zbYf5_S7oJo');
+    const iframeMarkup = '<iframe width="560" height="315" src="//www.youtube.com/embed/'
+        + videoId + '" frameborder="0" allowfullscreen></iframe>';
+
+    console.log('Video ID:', videoId)
+
+
+
+    function changeUrl() {
+        document.getElementById('note-file-upload').style.display = "none"
+        document.getElementById('note-url-upload').style.display = "block"
+
+    }
+    function changeFile() {
+        document.getElementById('note-file-upload').style.display = "block"
+        document.getElementById('note-url-upload').style.display = "none"
+    }
+</script>

@@ -159,7 +159,7 @@ module.exports = {
         })
     },
     markAssignment: (Id, data) => {
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
 
             db.get().collection(collection.STUDENT_ASSIGNMENT_COLLECTION).updateOne({ _id: objectId(Id) }, {
                 $set: {
@@ -168,6 +168,29 @@ module.exports = {
             }).then(() => {
                 resolve()
             })
+        })
+    },
+    addNotes: (data) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.NOTES_COLLECTION).insertOne(data).then((data) => {
+                resolve(data.ops[0])
+            })
+        })
+    },
+    notYputubeUrl: (url) => {
+        console.log("++++++++++++++++++++++++++++++++++++++++++++");
+        console.log(url);
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+    },
+    getNots:()=>{
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.NOTES_COLLECTION).find().toArray()
+            resolve(data)
         })
     }
 

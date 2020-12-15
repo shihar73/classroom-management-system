@@ -21,10 +21,32 @@ app.use((req, res, next) => {
     next()
   })
 
+
+//hbs helper
+const exhbs=hbs.create({
+    extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials',
+    helpers:{
+        iff:(a,b,options)=>{
+            console.log('A:B',a,b);
+            a=a.toString();
+            b=b.toString();
+            if(a===b){
+                return options.fn({status:true})
+            }
+        }
+    }
+})
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.engine('hbs',hbs({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials'}))
+app.engine('hbs',exhbs.engine)
+
+
+
 
 app.use(logger('dev'));
 app.use(express.json());

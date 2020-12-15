@@ -137,7 +137,7 @@ router.get("/assignments", verifyLogin, (req, res) => {
     console.log("dfasdfadsafsaSDFERHGTEGVFSDGBBFHF");
     tutorHelper.getAssignment().then((data) => {
 
-        res.render('tutor/tutor-assignment', { data,tutorData })
+        res.render('tutor/tutor-assignment', { data, tutorData })
     })
 })
 
@@ -147,7 +147,7 @@ router.post('/add-assignment', (req, res) => {
         if (req.files && req.files.doc) {
             let doc = req.files.doc
 
-            doc.mv('./public/doc/assignments/' + data._id+ ".pdf")
+            doc.mv('./public/doc/assignments/' + data._id + ".pdf")
         }
 
 
@@ -170,17 +170,55 @@ router.get("/delete-assignment/:id", verifyLogin, (req, res) => {
 router.get("/students-assignments/:id", verifyLogin, (req, res) => {
     let Id = req.params.id
     tutorHelper.getStudentAssignment(Id).then((data) => {
-        data.Id=Id
-        res.render('tutor/student-assignments', { data,tutorData })
+        data.Id = Id
+        res.render('tutor/student-assignments', { data, tutorData })
     })
 })
-router.post("/save-assignments-mark/:id",(req,res)=>{
-   let studentId=req.body.studentId
-   let Id = req.params.id
-    tutorHelper.markAssignment(Id,req.body).then(() => {
-        res.redirect('/tutor/students-assignments/'+studentId)
+router.post("/save-assignments-mark/:id", (req, res) => {
+    let studentId = req.body.studentId
+    let Id = req.params.id
+    tutorHelper.markAssignment(Id, req.body).then(() => {
+        res.redirect('/tutor/students-assignments/' + studentId)
     })
 })
+
+router.get("/add-notes", verifyLogin, (req, res) => {
+    tutorHelper.getNots().then((data) => {
+        console.log('======================d================');
+        console.log(data);
+console.log('=======================================================d');
+        res.render('tutor/notes', {data, tutorData })
+    })
+})
+router.post('/add-notes',(req,res)=>{
+
+    if(req.body.media=== 'youtube'){
+        req.body.youtubeId=tutorHelper.notYputubeUrl(req.body.url)
+    }
+
+    tutorHelper.addNotes(req.body).then((data) => {
+        res.redirect('/tutor/add-notes')
+        if(req.body.media=== 'image'){
+        console.log("image");
+            let image = req.files.file
+            image.mv('./public/images/notes/' + data._id + ".jpg")
+        }else if(req.body.media=== 'video'){
+            console.log("video");
+            let image = req.files.file
+            image.mv('./public/videos/notes/' + data._id + ".mp4")
+        }else if(req.body.media=== 'doc'){
+            console.log(doc);
+            let image = req.files.file
+            image.mv('./public/doc/notes/' + data._id + ".doc")
+        }
+
+
+    })
+       
+        
+    
+})
+
 
 
 module.exports = router;
