@@ -154,11 +154,26 @@ router.post('/add-assignment', (req, res) => {
     })
 })
 
+//Meadia viwes
 
+//assingment
 router.get("/doc/:id", (req, res) => {
     var Id = req.params.id
     res.render('doc/doc', { Id })
 })
+
+//nots-doc
+router.get("/doc-note/:id", (req, res) => {
+    var Id = req.params.id
+    res.render('doc/doc-note', { Id })
+})
+
+//note-videos
+router.get("/video-note/:id", (req, res) => {
+    var Id = req.params.id
+    res.render('doc/video-note', { Id })
+})
+
 
 router.get("/delete-assignment/:id", verifyLogin, (req, res) => {
     let Id = req.params.id
@@ -183,10 +198,8 @@ router.post("/save-assignments-mark/:id", (req, res) => {
 })
 
 router.get("/add-notes", verifyLogin, (req, res) => {
+    console.log(tutorData);
     tutorHelper.getNots().then((data) => {
-        console.log('======================d================');
-        console.log(data);
-console.log('=======================================================d');
         res.render('tutor/notes', {data, tutorData })
     })
 })
@@ -197,19 +210,14 @@ router.post('/add-notes',(req,res)=>{
     }
 
     tutorHelper.addNotes(req.body).then((data) => {
+        console.log(data);
         res.redirect('/tutor/add-notes')
-        if(req.body.media=== 'image'){
-        console.log("image");
-            let image = req.files.file
-            image.mv('./public/images/notes/' + data._id + ".jpg")
-        }else if(req.body.media=== 'video'){
-            console.log("video");
-            let image = req.files.file
-            image.mv('./public/videos/notes/' + data._id + ".mp4")
+        if(req.body.media=== 'video'){
+            let video = req.files.file
+            video.mv('./public/videos/notes/' + data._id + ".mp4")
         }else if(req.body.media=== 'doc'){
-            console.log(doc);
-            let image = req.files.file
-            image.mv('./public/doc/notes/' + data._id + ".doc")
+            let doc = req.files.file
+            doc.mv('./public/doc/notes/' + data._id + ".pdf")
         }
 
 
@@ -219,6 +227,31 @@ router.post('/add-notes',(req,res)=>{
     
 })
 
+router.get('/delete-note/:id',(req,res)=>{
+    let Id = req.params.id
+    tutorHelper.deleteNote(Id).then(() => {
+        res.redirect('/tutor/add-notes')
+    })
+})
+
+router.get('/today-task',(req,res)=>{
+    tutorHelper.getTasks()
+    res.render('tutor/today-task',{tutorData})
+})
+
+router.get('/set-task/:id',(req,res)=>{
+    let Id = req.params.id
+    tutorHelper.setNoteTask(Id,tutorData.taskID).then(() => {
+        res.redirect('/tutor/add-notes')
+    })
+})
+
+router.get('/set-task-assignment/:id',(req,res)=>{
+    let Id = req.params.id
+    tutorHelper.setAssinmentTask(Id,tutorData.taskID).then(() => {
+        res.redirect('/tutor/assignments')
+    })
+})
 
 
 module.exports = router;

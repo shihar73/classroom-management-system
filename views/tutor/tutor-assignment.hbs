@@ -30,20 +30,21 @@
         <ul class="responsive-table table-num">
             <li class="table-header">
                 <div class="col col-1">No</div>
-                <div class="col col-2" style="max-width: 35.667%;">Topic</div>
-                <div class="col col-3" style="max-width: 21.667%;">Document</div>
-                <div class="col col-4" style="max-width: 12.667%;">Delete</div>
+                <div class="col col-2" style="max-width: 35%;">Topic</div>
+                <div class="col col-3" style="max-width: 35%;">Document</div>
+                <div class="col col-4" style="max-width: 20%;">Delete</div>
             </li>
             {{#each data}}
             <li class="table-row" id="num">
                 <div class="col col-1" data-label="No">
                     <p class="sd-name" id=""></p>
                 </div>
-                <div class="col col-2" data-label="Name" style="max-width: 35.667%;">
+                <div class="col col-2" data-label="Name" style="max-width: 35%;">
                     <a href="" class="sd-name">{{this.topic}}</a>
                 </div>
-                <div class="col col-3" data-label="" style="max-width: 21.667%;"><a href="/tutor/doc/{{this._id}}"><i class="fa fa-file-pdf-o"></i></a></div>
-                <div class="col col-4" data-label="" style="max-width: 12.667%;">
+                <div class="col col-3" data-label="" style="max-width: 35%;"><a href="/tutor/doc/{{this._id}}"><i class="fa fa-file-pdf-o"></i></a></div>
+                <div class="col col-4" data-label="" style="max-width: 20%;">
+                    <a id="note-add-btn" onclick="addClicked()" href="/tutor/set-task-assignment/{{this._id}}" class="btn btn-primary">Add</a>
                     <a href="/tutor/delete-assignment/{{this._id}}"
                         onclick="return confirm('Do you want delete {{this.topic}}?')"><i class='fas fa-trash '></i></a>
                 </div>

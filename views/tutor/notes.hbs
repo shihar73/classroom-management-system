@@ -1,13 +1,14 @@
 <style>
-    .note-sm-img{
+    .note-sm-img {
         width: 60px;
         height: 60px;
-        
+
     }
-    .note-sm-img:hover{
+
+    .note-sm-img:hover {
         width: 62px;
         height: 62px;
-       
+
     }
 </style>
 
@@ -23,11 +24,9 @@
                     <label for="">Topic</label>
                     <input type="text" name="topic"
                         style="display: block; height: 2.5rem;border: 3px solid;border-color: #1a015129;"
-                        placeholder="Topic"><br>
+                        placeholder="Topic">
+                    <br>
 
-                    <input onclick="changeFile()" type="radio" id="upload" name="media" value="image"
-                        style="display: block; float: left;">
-                    <label for="male"> image</label>
                     <input onclick="changeFile()" type="radio" id="upload" name="media" value="video"
                         style="display: block;float: left;">
                     <label for="female"> Video</label>
@@ -42,6 +41,9 @@
                     <input id="note-file-upload" type="file" name="file">
                     <input id="note-url-upload" type="url" name="url"
                         style=" height: 2.5rem;border: 3px solid;border-color: #1a015129;">
+                    <br>
+                    <textarea style="display: block; ;border: 3px solid;border-color: #1a015129;" name="about" id=""
+                        cols="30" rows="10">About</textarea>
                     <br>
                     <input type="submit" class="save100-form-btn ml-5" value="save">
                 </form>
@@ -66,45 +68,39 @@
                 <div class="col col-4" style="max-width: 20%;">Delete</div>
             </li>
             {{#each data}}
-            <li class="table-row" id="num" >
+            <li class="table-row" id="num">
                 <div class="col col-2" data-label="Name" style="max-width: 35%;">
                     <a href="" class="sd-name">{{this.topic}}</a>
                 </div>
                 {{#iff this.media 'doc'}}
 
                 <div class="col col-3" data-label="" style="max-width: 35%;">
-                    <a href="/tutor/doc/{{../_id}}">
+                    <a href="/tutor/doc-note/{{../_id}}">
                         <i class="fa fa-file-pdf-o"></i>
-                    </a>
-                </div>
-                {{/iff}}
-
-                {{#iff this.media 'image'}}
-                <div class="col col-3" data-label="" style="max-width: 35%;">
-                    <a href="/tutor//{{this._id}}">
-                        <img src="/images/notes/{{.._id}}.jpg" alt="image" class="note-sm-img">
                     </a>
                 </div>
                 {{/iff}}
 
                 {{#iff this.media 'video'}}
                 <div class="col col-3" data-label="" style="max-width: 35%;">
-                    <a href="/tutor/doc/{{this._id}}">
+                    <a href="/tutor/video-note/{{../_id}}">
                         <i class="fa fa-file-video-o"></i>
                     </a>
                 </div>
                 {{/iff}}
 
-                 {{#iff this.media 'youtube'}}
+                {{#iff this.media 'youtube'}}
                 <div class="col col-3" data-label="" style="max-width: 35%;">
                     <a href="{{../url}}">
-                    <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
+                        <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
                     </a>
                 </div>
                 {{/iff}}
 
                 <div class="col col-4" data-label="" style="max-width: 20%;">
-                    <a href="/tutor/delete-assignment/{{this._id}}"
+                    <a id="note-add-btn" onclick="addClicked()" href="/tutor/set-task/{{this._id}}" class="btn btn-primary">Add</a>
+                    {{!-- <a id="note-cancel-btn" onclick="cancelClicked()" href="/tutor/remove-task/{{this._id}}" class="btn btn-secondary" style="display: none;">Cancel</a> --}}
+                    <a href="/tutor/delete-note/{{this._id}}"
                         onclick="return confirm('Do you want delete {{this.topic}}?')"><i class='fas fa-trash '></i>
                     </a>
                 </div>
@@ -114,30 +110,6 @@
     </div>
 </section>
 <script>
-
-
-
-
-
-
-
-    function getId(url) {
-        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-        const match = url.match(regExp);
-
-        return (match && match[2].length === 11)
-            ? match[2]
-            : null;
-    }
-
-    const videoId = getId('http://www.youtube.com/watch?v=zbYf5_S7oJo');
-    const iframeMarkup = '<iframe width="560" height="315" src="//www.youtube.com/embed/'
-        + videoId + '" frameborder="0" allowfullscreen></iframe>';
-
-    console.log('Video ID:', videoId)
-
-
-
     function changeUrl() {
         document.getElementById('note-file-upload').style.display = "none"
         document.getElementById('note-url-upload').style.display = "block"

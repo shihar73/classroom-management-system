@@ -27,7 +27,6 @@ const exhbs=hbs.create({
     extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/',partialsDir:__dirname+'/views/partials',
     helpers:{
         iff:(a,b,options)=>{
-            console.log('A:B',a,b);
             a=a.toString();
             b=b.toString();
             if(a===b){

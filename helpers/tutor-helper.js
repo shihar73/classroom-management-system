@@ -178,8 +178,6 @@ module.exports = {
         })
     },
     notYputubeUrl: (url) => {
-        console.log("++++++++++++++++++++++++++++++++++++++++++++");
-        console.log(url);
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
 
@@ -187,12 +185,74 @@ module.exports = {
             ? match[2]
             : null;
     },
-    getNots:()=>{
+    getNots: () => {
         return new Promise(async (resolve, reject) => {
             let data = await db.get().collection(collection.NOTES_COLLECTION).find().toArray()
             resolve(data)
         })
-    }
+    },
+    deleteNote: (Id) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.NOTES_COLLECTION).removeOne({ _id: objectId(Id) }).then((response) => {
+                resolve()
+            })
+        })
+    },
+    setNoteTask: (noteId, taskId) => {
+        return new Promise(async (resolve, reject) => {
+            let task = {
+                note: noteId,
+                assignmet:null
+            }
+            let fTask = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
+
+            if (fTask) {
+                db.get().collection(collection.TASK_COLLECTION).updateOne({ _id: objectId(fTask[0]._id) }, {
+                    $set: {
+                        note: noteId
+                    }
+                }).then(() => {
+
+                    resolve()
+                })
+
+
+            } else {
+
+                db.get().collection(collection.TASK_COLLECTION).insertOne(task).then((data) => {
+                    resolve()
+                })
+            }
+        })
+    },
+    setAssinmentTask: (assId, taskId) => {
+        return new Promise(async (resolve, reject) => {
+            let task = {
+                note: null,
+                assignmet: assId,
+            }
+            let fTask = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
+           
+            if (fTask) {
+                db.get().collection(collection.TASK_COLLECTION).updateOne({ _id: objectId(fTask[0]._id) }, {
+                    $set: {
+                        assignmet: assId
+                    }
+                }).then(() => {
+
+                    resolve()
+                })
+
+
+            } else {
+
+                db.get().collection(collection.TASK_COLLECTION).insertOne(task).then((data) => {
+                    resolve()
+                })
+            }
+        })
+    },
+
 
 
 

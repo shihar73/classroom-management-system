@@ -367,7 +367,13 @@
     float: left;
     color: rgb(15, 1, 1);
 }
-
+.task-div {
+background-color: #cccccc73;
+  width: 27rem;
+  height: 100%;
+  float: left;
+  color: rgb(15, 1, 1);
+}
 
 /* table number */
 .table-num{

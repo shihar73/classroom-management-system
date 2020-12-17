@@ -4,4 +4,6 @@ module.exports = {
     ASSIGNMENT_COLLECTION:'assignment',
     STUDENT_ASSIGNMENT_COLLECTION:'studentAssignment',
     NOTES_COLLECTION:'notes',
+    TASK_COLLECTION:'task',
+    
 }
