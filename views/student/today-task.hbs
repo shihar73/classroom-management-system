@@ -1,0 +1,200 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+
+    .card {
+        height: 280px;
+        max-width: 350px;
+        margin: 0 20px;
+        background: white;
+        transition: 0.4s;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+        height: 470px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card .img {
+        height: 80px;
+        width: 100%;
+    }
+
+    .card .img img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .card .top-text {
+        padding: 5px;
+    }
+
+    .card .top-text .name {
+        font-size: 25px;
+        font-weight: 600;
+        color: #202020;
+    }
+
+    .card .top-text p {
+        font-size: 20px;
+        font-weight: 600;
+        color: #e74c3c;
+        line-height: 20px;
+    }
+
+    .card .bottom-text {
+        padding: 0 20px 10px 20px;
+        margin-top: 5px;
+        background: white;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.1s;
+    }
+
+    .card:hover .bottom-text {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .card .bottom-text .text {
+        text-align: justify;
+    }
+
+    .card .bottom-text .btn {
+        margin: 10px 0;
+        text-align: left;
+    }
+
+    .card .bottom-text .btn a {
+        text-decoration: none;
+        background: #e74c3c;
+        color: #f2f2f2;
+        padding: 5px 8px;
+        border-radius: 3px;
+        display: inline-flex;
+        transition: 0.2s;
+    }
+
+    .card .bottom-text .btn a:hover {
+        transform: scale(0.9);
+    }
+
+    @media screen and (max-width: 978px) {
+        .container {
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        .card {
+            max-width: 700px;
+            margin: 20px 0;
+        }
+    }
+</style>
+
+
+
+
+<section class="session1">
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+            <div class="task-div col-10 col-md-5 m-4">
+
+                <p class="text-center mt-3 font-weight-bold mb-4"
+                    style="font-size: 1.5rem; text-decoration: underline; color: black;">Note</p>
+
+                {{#each data.note}}
+
+                <div class="card">
+
+
+                    {{#iff this.media 'doc'}}
+                    <div onclick="attendance('{{../_id}}','{{../../studentData.student._id}}','doc')" class="img">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </div>
+                    {{/iff}}
+
+                    {{#iff this.media 'video'}}
+                    <div onclick="attendance('{{../_id}}','{{../../studentData.student._id}}','video')" class="img">
+                        <i class="fa fa-file-video-o"></i>
+                    </div>
+                    {{/iff}}
+
+                    {{#iff this.media 'youtube'}}
+                    <a href="{{../url}}" class="img">
+                        <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
+                    </a>
+                    {{/iff}}
+
+                    </form>
+
+                    <div class="top-text">
+                        <div class="name">{{this.topic}}</div>
+
+                    </div>
+                    <h5>{{this.about}}</h5>
+
+                </div>
+                {{/each}}
+
+
+                <a class="ml-auto mt-auto btn btn-primary" href="/tutor/assignments">Add</a>
+            </div>
+            <div class="task-div col-10 col-md-5 m-4 ">
+
+                <p class="text-center mt-3 font-weight-bold mb-4"
+                    style="font-size: 1.5rem; text-decoration: underline; color: black;">Assignment</p>
+
+                {{#each data.assignment}}
+                <div class="card">
+                    <a href="/tutor/doc/{{this._id}}" class="img pt-5">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </a>
+                    <div class="top-text">
+                        <div class="name">{{this.topic}}</div>
+                    </div>
+                    <h5>{{this.about}}</h5>
+                </div>
+                {{/each}}
+
+
+
+                <a class="ml-auto mt-auto btn btn-primary" href="/tutor/add-notes">Add</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+   function attendance(noteId, studentId, media) {
+       
+
+    $.ajax({
+        url: '/attendance',
+        data: {
+            noteId: noteId,
+            studentId: studentId,
+            media: media,
+           
+        },
+        method: 'post',
+        success: (responce) => {
+            console.log(responce)
+            if( responce === 'doc'){
+                location.href='/tutor/doc-note/'+noteId
+            }else if(responce === 'video'){
+                location.href='/tutor/video-note/'+noteId
+            }
+        }
+
+    })
+
+}
+
+
+
+
+</script>

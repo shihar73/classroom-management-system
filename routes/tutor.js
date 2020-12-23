@@ -200,58 +200,70 @@ router.post("/save-assignments-mark/:id", (req, res) => {
 router.get("/add-notes", verifyLogin, (req, res) => {
     console.log(tutorData);
     tutorHelper.getNots().then((data) => {
-        res.render('tutor/notes', {data, tutorData })
+        res.render('tutor/notes', { data, tutorData })
     })
 })
-router.post('/add-notes',(req,res)=>{
+router.post('/add-notes', (req, res) => {
 
-    if(req.body.media=== 'youtube'){
-        req.body.youtubeId=tutorHelper.notYputubeUrl(req.body.url)
+    if (req.body.media === 'youtube') {
+        req.body.youtubeId = tutorHelper.notYputubeUrl(req.body.url)
     }
 
     tutorHelper.addNotes(req.body).then((data) => {
         console.log(data);
         res.redirect('/tutor/add-notes')
-        if(req.body.media=== 'video'){
+        if (req.body.media === 'video') {
             let video = req.files.file
             video.mv('./public/videos/notes/' + data._id + ".mp4")
-        }else if(req.body.media=== 'doc'){
+        } else if (req.body.media === 'doc') {
             let doc = req.files.file
             doc.mv('./public/doc/notes/' + data._id + ".pdf")
         }
 
 
     })
-       
-        
-    
+
+
+
 })
 
-router.get('/delete-note/:id',(req,res)=>{
+router.get('/delete-note/:id', (req, res) => {
     let Id = req.params.id
     tutorHelper.deleteNote(Id).then(() => {
         res.redirect('/tutor/add-notes')
     })
 })
 
-router.get('/today-task',(req,res)=>{
-    tutorHelper.getTasks()
-    res.render('tutor/today-task',{tutorData})
-})
 
-router.get('/set-task/:id',(req,res)=>{
+router.get('/set-task/:id', (req, res) => {
     let Id = req.params.id
-    tutorHelper.setNoteTask(Id,tutorData.taskID).then(() => {
+    tutorHelper.setNoteTask(Id, tutorData.tutor._id).then(() => {
         res.redirect('/tutor/add-notes')
     })
 })
 
-router.get('/set-task-assignment/:id',(req,res)=>{
+router.get('/set-task-assignment/:id', (req, res) => {
     let Id = req.params.id
-    tutorHelper.setAssinmentTask(Id,tutorData.taskID).then(() => {
+    tutorHelper.setAssinmentTask(Id, tutorData.tutor._id).then(() => {
         res.redirect('/tutor/assignments')
     })
 })
+
+router.get('/today-task',verifyLogin, (req, res) => {
+    tutorHelper.getTasks().then((data)=>{
+        console.log('_____________________________________________');
+        console.log(data);
+        console.log('-------------------------------------------');
+        res.render('tutor/today-task', {data, tutorData })
+    })
+})
+
+
+
+
+
+
+
 
 
 module.exports = router;

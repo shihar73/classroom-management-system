@@ -105,51 +105,57 @@
                 <p class="text-center mt-3 font-weight-bold mb-4"
                     style="font-size: 1.5rem; text-decoration: underline; color: black;">Note</p>
 
+                {{#each data.note}}
+                <div class="card">
+
+
+                    {{#iff this.media 'doc'}}
+                    <a href="/tutor/doc-note/{{../_id}}" class="img">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </a>
+                    {{/iff}}
+
+                    {{#iff this.media 'video'}}
+                    <a href="/tutor/video-note/{{../_id}}" class="img">
+                        <i class="fa fa-file-video-o"></i>
+                    </a>
+                    {{/iff}}
+
+                    {{#iff this.media 'youtube'}}
+                    <a href="{{../url}}" class="img">
+                        <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
+                    </a>
+                    {{/iff}}
+
+                    <div class="top-text">
+                        <div class="name">{{this.topic}}</div>
+                        
+                    </div>
+                    <h5>{{this.about}}</h5>
+                    
+                </div>
+                {{/each}}
+
+
                 <a class="ml-auto mt-auto btn btn-primary" href="/tutor/assignments">Add</a>
             </div>
             <div class="task-div col-10 col-md-5 m-4 ">
 
                 <p class="text-center mt-3 font-weight-bold mb-4"
                     style="font-size: 1.5rem; text-decoration: underline; color: black;">Assignment</p>
-                <div class="card">
-                    <div class="img">
-                        <img src="#">
-                    </div>
-                    <div class="top-text">
-                        <div class="name">
-                            Annie Lea</div>
-                        <p>
-                            Apps Developer</p>
-                    </div>
-                    <div class="bottom-text">
-                        <div class="text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci
-                            reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!</div>
-                        <div class="btn">
-                            <a href="#">Read more</a>
-                        </div>
-                    </div>
-                </div>
 
+                {{#each data.assignment}}
                 <div class="card">
-                    <div class="img">
-                        <img src="#">
-                    </div>
+                    <a href="/tutor/doc/{{this._id}}" class="img pt-5">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </a>
                     <div class="top-text">
-                        <div class="name">
-                            Annie Lea</div>
-                        <p>
-                            Apps Developer</p>
+                        <div class="name">{{this.topic}}</div>
                     </div>
-                    <div class="bottom-text">
-                        <div class="text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci
-                            reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!</div>
-                        <div class="btn">
-                            <a href="#">Read more</a>
-                        </div>
-                    </div>
+                    <h5>{{this.about}}</h5>
                 </div>
+                {{/each}}
+
 
 
                 <a class="ml-auto mt-auto btn btn-primary" href="/tutor/add-notes">Add</a>

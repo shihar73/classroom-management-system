@@ -198,16 +198,16 @@ module.exports = {
             })
         })
     },
-    setNoteTask: (noteId, taskId) => {
+    setNoteTask: (noteId, tutorId) => {
         return new Promise(async (resolve, reject) => {
             let task = {
+                tutorId:tutorId,
                 note: noteId,
-                assignmet:null
             }
-            let fTask = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
+            let fTask = await db.get().collection(collection.TASK_COLLECTION).findOne({ tutorId:tutorId })
 
             if (fTask) {
-                db.get().collection(collection.TASK_COLLECTION).updateOne({ _id: objectId(fTask[0]._id) }, {
+                db.get().collection(collection.TASK_COLLECTION).updateOne({ tutorId:tutorId }, {
                     $set: {
                         note: noteId
                     }
@@ -225,16 +225,16 @@ module.exports = {
             }
         })
     },
-    setAssinmentTask: (assId, taskId) => {
+    setAssinmentTask: (assId, tutorId) => {
         return new Promise(async (resolve, reject) => {
             let task = {
-                note: null,
+                tutorId:tutorId,
                 assignmet: assId,
             }
-            let fTask = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
+            let fTask = await db.get().collection(collection.TASK_COLLECTION).findOne({ tutorId:tutorId })
            
             if (fTask) {
-                db.get().collection(collection.TASK_COLLECTION).updateOne({ _id: objectId(fTask[0]._id) }, {
+                db.get().collection(collection.TASK_COLLECTION).updateOne({ tutorId:tutorId }, {
                     $set: {
                         assignmet: assId
                     }
@@ -252,6 +252,32 @@ module.exports = {
             }
         })
     },
+    getTasks:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let data={
+                note:[],
+                assignment:[]
+            }
+            let Task = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
+            console.log(Task);
+            console.log("task length :::::::::",Task.length);
+            for(i=0;i<Task.length;i++){
+                console.log("gfhdfsh ====" ,i);
+                if(Task[i].note){
+
+                    data.note[i] = await db.get().collection(collection.NOTES_COLLECTION).findOne({_id: objectId(Task[i].note)})
+                }
+                if(Task[i].assignmet){
+
+                    data.assignment[i] = await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({_id: objectId(Task[i].assignmet)})
+                }
+                console.log(data);
+            }
+             console.log('========================dsfdsgds=gdsghfdt=hfthfffff========================');
+             console.log(data);
+             resolve(data)
+        })
+    }
 
 
 

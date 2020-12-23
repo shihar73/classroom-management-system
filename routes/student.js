@@ -39,7 +39,8 @@ router.post('/login', (req, res) => {
         if (response.logStatus) {
             req.session.student = response.student
             studentData.student = response.student
-            res.redirect('/otp')
+            req.session.studentLoggedIn = true
+            res.redirect('/home')
         } else {
             req.session.studentloginErr = response.loginErr
             res.redirect("/login")
@@ -47,6 +48,27 @@ router.post('/login', (req, res) => {
         }
     })
 })
+
+router.get('/otp-login',(req,res)=>{
+    res.render('student/login-otp',{ "loginErr": req.session.studentloginErr })
+})
+
+
+router.post('/otp-login',(req,res)=>{
+    studentHelper.otpLogin(req.body.email).then((response)=>{
+        if(response.logStatus){
+            req.session.student = response.student
+            studentData.student = response.student
+            res.redirect('/otp')
+        }else{
+            req.session.studentloginErr=response.loginErr
+            res.redirect('/otp-login')
+            req.session.studentLoggedIn = false
+        }
+    })
+})
+
+
 router.get('/otp', studentVerify, (req, res) => {
     console.log(req.session.student);
     studentHelper.sendOtp(req.session.student.number).then((otp) => {
@@ -56,7 +78,7 @@ router.get('/otp', studentVerify, (req, res) => {
     // studentData.otp = Math.random();
     // studentData.otp  = studentData.otp  * 10000;
     // studentData.otp  = parseInt(studentData.otp );
-    // console.log(studentData.otp );
+    // console.log(studentData.otp);
     res.render('student/otp', { msg })
     var msg = null
 })
@@ -101,6 +123,23 @@ router.post('/add-assignment', (req, res) => {
 
 
     })
+})
+
+router.get('/todays-task',verifyLogin, (req, res) => {
+    studentHelper.getTasks().then((data)=>{
+       res.render('student/today-task', {data, studentData })
+    })
+})
+
+
+router.post("/attendance",(req,res)=>{
+    
+    let responce=req.body.media
+    studentHelper.attendance(req.body).then(()=>{
+       console.log(responce);
+        res.json(responce)
+    })
+            
 })
 
 

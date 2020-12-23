@@ -5,5 +5,6 @@ module.exports = {
     STUDENT_ASSIGNMENT_COLLECTION:'studentAssignment',
     NOTES_COLLECTION:'notes',
     TASK_COLLECTION:'task',
+    ATTENDANCE_COLLECTION:'attendance'
     
 }
