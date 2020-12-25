@@ -59,39 +59,42 @@ $(document).ready(function () {
 
             }
         }
-        
+
     })
-    
-    
+
+
 })
 
 
-// function tutorForm() {
+// $("#upload-asgmt").change(function () {
+//     var fileExtension = ['pdf', 'PDF'];
+//     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+//         alert("Only formats are allowed : pdf");
+//     }
+// });
 
-    
 
-//         $('#tutorFormEdit').submit((e) => {
-//             e.preventDefault()
-//             $.ajax({
-//                 url: "/tutor/edit-profile",
-//                 enctype: 'multipart/form-data',
-//                 data: $("tutorFormEdit").serialize(),
-//                 method: "post",
-//                 processData: false,
-//                 contentType: false,
-//                 cache: false,
-//                 success: function (response) {
-//                     alert("Submitted successfully")
-//                     location.href = '/tutor/profile'
+// $(document).ready(function () {
 
-//                 },
-//                 error: function (err) {
-//                     alert("Something Error")
+//     $('#form-asgmt').validate({
 
-//                 }
-//             })
-//         })
-    
-// }
+//         rules: {
+//             topic: {
+//                 required: true,
+//                 minlength: 3
+//             },
+//             about: {
+//                 required: true,
+//                 minlength: 4
+//             },
+//             doc: {
+//                 required: true, 
+//                 maxupload: 1,
+//             }
+//         }
 
+//     })
+
+
+// })
 

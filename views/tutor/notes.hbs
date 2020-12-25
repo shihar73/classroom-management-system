@@ -22,12 +22,12 @@
                 <form class="upload-button-wrap" action="/tutor/add-notes" method="POST" enctype="multipart/form-data"
                     style="padding-left: 30%; width:100%;">
                     <label for="">Topic</label>
-                    <input type="text" name="topic"
+                    <input required type="text" name="topic"
                         style="display: block; height: 2.5rem;border: 3px solid;border-color: #1a015129;"
                         placeholder="Topic">
                     <br>
 
-                    <input onclick="changeFile()" type="radio" id="upload" name="media" value="video"
+                    <input required onclick="changeFile()" type="radio" id="upload" name="media" value="video"
                         style="display: block;float: left;">
                     <label for="female"> Video</label>
                     <input onclick="changeFile()" type="radio" id="upload" name="media" value="doc"
@@ -38,7 +38,7 @@
                     <label for="other"> Youtube</label><br>
 
 
-                    <input id="note-file-upload" type="file" name="file">
+                    <input id="note-file-upload" type="file" name="file" accept=".pdf,.mb4,.mkv">
                     <input id="note-url-upload" type="url" name="url"
                         style=" height: 2.5rem;border: 3px solid;border-color: #1a015129;">
                     <br>
@@ -113,10 +113,14 @@
     function changeUrl() {
         document.getElementById('note-file-upload').style.display = "none"
         document.getElementById('note-url-upload').style.display = "block"
-
+        document.getElementById('note-file-upload').required=false
+        document.getElementById('note-url-upload').required=true
+        
     }
     function changeFile() {
         document.getElementById('note-file-upload').style.display = "block"
         document.getElementById('note-url-upload').style.display = "none"
+        document.getElementById('note-file-upload').required=true
+        document.getElementById('note-url-upload').required=false
     }
 </script>

@@ -94,7 +94,7 @@ router.post("/otp", (req, res) => {
             req.session.studentLoggedIn = false
             req.session.student = null
             req.session.studentloginErr = "Otp is not match please login again"
-            res.redirect('/login')
+            res.redirect('/otp-login')
         }
     })
 })
@@ -124,6 +124,19 @@ router.post('/add-assignment', (req, res) => {
 
     })
 })
+router.get("/doc/:id", (req, res) => {
+    var Id = req.params.id
+    res.render('doc/std-doc', { Id })
+})
+
+
+router.get("/delete-assignment/:id", verifyLogin, (req, res) => {
+    let Id = req.params.id
+    studentHelper.deleteAssignment(Id).then(() => {
+        res.redirect('/assignments')
+    })
+})
+
 
 router.get('/todays-task',verifyLogin, (req, res) => {
     studentHelper.getTasks().then((data)=>{

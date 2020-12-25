@@ -136,7 +136,14 @@ module.exports = {
 
             }
         })
-    }
+    },
+    deleteAssignment: (Id) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.STUDENT_ASSIGNMENT_COLLECTION).removeOne({ _id: objectId(Id) }).then((response) => {
+                resolve()
+            })
+        })
+    },
 
 
 

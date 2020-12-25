@@ -11,9 +11,9 @@
             <div class="upload-button-wrap input-group ">
                 <form class="upload-button-wrap" action="/add-assignment" method="POST" enctype="multipart/form-data" style="padding-left: 30%; width:100%;">
                     <label for="">Topic</label>
-                <input type="text" name="topic" style="display: block; height: 2.5rem;border: 3px solid;border-color: #1a015129;" placeholder="Topic"><br>
+                <input required type="text" name="topic" style="display: block; height: 2.5rem;border: 3px solid;border-color: #1a015129;" placeholder="Topic"><br>
                 <label class="upload-button" for="upload">File</label><br>
-                <input name="doc" id="upload" type="file" onclick="viewDoc(event)">
+                <input required accept=".pdf" name="doc" id="upload" type="file" onclick="viewDoc(event)">
                 <input type="submit" class="save100-form-btn ml-5" value="save">
                 <input type="text" name="studentId" value="{{studentData.student._id}}" hidden>
                 </form>
@@ -43,10 +43,10 @@
                 <div class="col col-2" data-label="Name" style="max-width: 30%;">
                     <a href="" class="sd-name">{{this.topic}}</a>
                 </div>
-                <div class="col col-3" data-label="" style="max-width: 30%;"><a href="/tutor/doc/{{this._id}}"><i class="fa fa-file-pdf-o"></i></a></div>
+                <div class="col col-3" data-label="" style="max-width: 30%;"><a href="/doc/{{this._id}}"><i class="fa fa-file-pdf-o"></i></a></div>
                 <div class="col col-3" data-label="" style="max-width: 15%;">{{this.mark}}</div>
                 <div class="col col-4" data-label="" style="max-width: 15%;">
-                    <a href="/delete-assignments/{{this._id}}"
+                    <a href="/delete-assignment/{{this._id}}"
                         onclick="return confirm('Do you want delete {{this.topic}}?')"><i class='fas fa-trash '></i></a>
                 </div>
             </li>
