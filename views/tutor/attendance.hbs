@@ -1,0 +1,39 @@
+<section class="session1">
+    <div class="container ">
+<div class="arrow-position">
+    <a href="/tutor"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
+</div>
+        <div style="text-align: end;">
+            <h2 class="h2-table">Attendance ({{crDate}})</h2>
+        </div>
+
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">No</div>
+                <div class="col col-2">Name</div>
+                <div class="col col-3"></div>
+                <div class="col col-4">Actions</div>
+            </li>
+            {{#each data}}
+            <li class="table-row">
+                <div class="col col-1" data-label="No">
+                     <a href="/tutor//{{this._id}}" class="sd-name">{{this.no}}</a>
+                </div>
+                <div class="col col-2" data-label="Name">
+                   <a href="/tutor//{{this._id}}" class="sd-name">{{this.name}}</a>
+                    </div>
+                <div class="col col-3" data-label=""></div>
+                <div class="col col-4" data-label="">
+                    {{#iff this.attendance 'P'}}
+                    <p style="color: #00ff1c;font-weight: bold;font-size: 18px;">P</p>
+                    {{/iff}}
+
+                    {{#iff this.attendance 'A'}}
+                    <p style="color: #d60303;font-weight: bold;font-size: 18px;">A</p>
+                    {{/iff}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</section>

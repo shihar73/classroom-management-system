@@ -109,7 +109,6 @@
 
                 <div class="card">
 
-
                     {{#iff this.media 'doc'}}
                     <div onclick="attendance('{{../_id}}','{{../../studentData.student._id}}','doc')" class="img">
                         <i class="fa fa-file-pdf-o"></i>
@@ -127,8 +126,6 @@
                         <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
                     </a>
                     {{/iff}}
-
-                    </form>
 
                     <div class="top-text">
                         <div class="name">{{this.topic}}</div>
@@ -169,30 +166,30 @@
 </section>
 
 <script>
-   function attendance(noteId, studentId, media) {
-       
+    function attendance(noteId, studentId, media) {
 
-    $.ajax({
-        url: '/attendance',
-        data: {
-            noteId: noteId,
-            studentId: studentId,
-            media: media,
-           
-        },
-        method: 'post',
-        success: (responce) => {
-            console.log(responce)
-            if( responce === 'doc'){
-                location.href='/tutor/doc-note/'+noteId
-            }else if(responce === 'video'){
-                location.href='/tutor/video-note/'+noteId
+
+        $.ajax({
+            url: '/attendance',
+            data: {
+                noteId: noteId,
+                studentId: studentId,
+                media: media,
+
+            },
+            method: 'post',
+            success: (responce) => {
+                console.log(responce)
+                if (responce === 'doc') {
+                    location.href = '/tutor/doc-note/' + noteId
+                } else if (responce === 'video') {
+                    location.href = '/tutor/video-note/' + noteId
+                }
             }
-        }
 
-    })
+        })
 
-}
+    }
 
 
 

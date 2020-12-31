@@ -251,13 +251,20 @@ router.get('/set-task-assignment/:id', (req, res) => {
 
 router.get('/today-task',verifyLogin, (req, res) => {
     tutorHelper.getTasks().then((data)=>{
-        console.log('_____________________________________________');
-        console.log(data);
-        console.log('-------------------------------------------');
         res.render('tutor/today-task', {data, tutorData })
     })
 })
 
+router.get('/attendance',verifyLogin, (req, res) => {let dateObj = new Date()
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    var crDate = day + "/" + month + "/" +year ;
+
+    tutorHelper.getattendance().then((data)=>{
+        res.render('tutor/attendance', {crDate, data, tutorData })
+    })
+})
 
 
 

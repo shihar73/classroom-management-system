@@ -140,6 +140,7 @@ router.get("/delete-assignment/:id", verifyLogin, (req, res) => {
 
 router.get('/todays-task',verifyLogin, (req, res) => {
     studentHelper.getTasks().then((data)=>{
+        console.log(data);
        res.render('student/today-task', {data, studentData })
     })
 })

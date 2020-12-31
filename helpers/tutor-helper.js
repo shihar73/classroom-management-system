@@ -201,13 +201,13 @@ module.exports = {
     setNoteTask: (noteId, tutorId) => {
         return new Promise(async (resolve, reject) => {
             let task = {
-                tutorId:tutorId,
+                tutorId: tutorId,
                 note: noteId,
             }
-            let fTask = await db.get().collection(collection.TASK_COLLECTION).findOne({ tutorId:tutorId })
+            let fTask = await db.get().collection(collection.TASK_COLLECTION).findOne({ tutorId: tutorId })
 
             if (fTask) {
-                db.get().collection(collection.TASK_COLLECTION).updateOne({ tutorId:tutorId }, {
+                db.get().collection(collection.TASK_COLLECTION).updateOne({ tutorId: tutorId }, {
                     $set: {
                         note: noteId
                     }
@@ -228,13 +228,13 @@ module.exports = {
     setAssinmentTask: (assId, tutorId) => {
         return new Promise(async (resolve, reject) => {
             let task = {
-                tutorId:tutorId,
+                tutorId: tutorId,
                 assignmet: assId,
             }
-            let fTask = await db.get().collection(collection.TASK_COLLECTION).findOne({ tutorId:tutorId })
-           
+            let fTask = await db.get().collection(collection.TASK_COLLECTION).findOne({ tutorId: tutorId })
+
             if (fTask) {
-                db.get().collection(collection.TASK_COLLECTION).updateOne({ tutorId:tutorId }, {
+                db.get().collection(collection.TASK_COLLECTION).updateOne({ tutorId: tutorId }, {
                     $set: {
                         assignmet: assId
                     }
@@ -252,31 +252,66 @@ module.exports = {
             }
         })
     },
-    getTasks:()=>{
-        return new Promise(async(resolve,reject)=>{
-            let data={
-                note:[],
-                assignment:[]
+    getTasks: () => {
+        return new Promise(async (resolve, reject) => {
+            let data = {
+                note: [],
+                assignment: []
             }
             let Task = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
             console.log(Task);
-            console.log("task length :::::::::",Task.length);
-            for(i=0;i<Task.length;i++){
-                console.log("gfhdfsh ====" ,i);
-                if(Task[i].note){
+            console.log("task length :::::::::", Task.length);
+            for (i = 0; i < Task.length; i++) {
+                console.log("gfhdfsh ====", i);
+                if (Task[i].note) {
 
-                    data.note[i] = await db.get().collection(collection.NOTES_COLLECTION).findOne({_id: objectId(Task[i].note)})
+                    data.note[i] = await db.get().collection(collection.NOTES_COLLECTION).findOne({ _id: objectId(Task[i].note) })
                 }
-                if(Task[i].assignmet){
+                if (Task[i].assignmet) {
 
-                    data.assignment[i] = await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({_id: objectId(Task[i].assignmet)})
+                    data.assignment[i] = await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({ _id: objectId(Task[i].assignmet) })
                 }
                 console.log(data);
             }
-             console.log('========================dsfdsgds=gdsghfdt=hfthfffff========================');
-             console.log(data);
-             resolve(data)
+            console.log('========================dsfdsgds=gdsghfdt=hfthfffff========================');
+            console.log(data);
+            resolve(data)
         })
+    },
+    getattendance: () => {
+        return new Promise(async (resolve, reject) => {
+            var data = []
+            let dateObj = new Date()
+            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
+            var crDate = day + "/" + month + "/" +year ;
+            console.log('crdate ', crDate);
+
+            let students = await db.get().collection(collection.STUDENT_COLLECTION).find().toArray()
+            
+            for (i = 0; i < students.length; i++) {
+                students[i]._id=students[i]._id.toString()
+                let attData={}
+                attData.studentId=students[i]._id
+                attData.name=students[i].name
+                attData.no=students[i].no
+                let attendance = await db.get().collection(collection.ATTENDANCE_COLLECTION).findOne({studentId:students[i]._id,date:crDate})
+                console.log(attendance);
+                if(attendance){
+                    attData.attendance="P"
+                }else{
+                    attData.attendance="A"
+
+                }
+                data[i]=attData
+
+            }
+
+            console.log(data);
+            resolve(data)
+        })
+
     }
 
 

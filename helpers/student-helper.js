@@ -80,23 +80,29 @@ module.exports = {
     },
     getTasks: () => {
         return new Promise(async (resolve, reject) => {
-            let data = {
+           let data = {
                 note: [],
                 assignment: []
             }
             let Task = await db.get().collection(collection.TASK_COLLECTION).find().toArray()
             for (i = 0; i < Task.length; i++) {
                 if (Task[i].note) {
+                    var note= await db.get().collection(collection.NOTES_COLLECTION).findOne({ _id: objectId(Task[i].note) })
+                    if(note){
 
-                    data.note[i] = await db.get().collection(collection.NOTES_COLLECTION).findOne({ _id: objectId(Task[i].note) })
+                        data.note[i]=note
+                    }
                 }
                 if (Task[i].assignmet) {
+                    var assignmet= await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({ _id: objectId(Task[i].assignmet) })
+                    if(assignmet){
 
-                    data.assignment[i] = await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({ _id: objectId(Task[i].assignmet) })
+                        data.assignment[i] = assignmet
+                    }
                 }
             }
             resolve(data)
-        })
+            })
     },
     attendance: (data) => {
         return new Promise(async (resolve, reject) => {
@@ -105,7 +111,7 @@ module.exports = {
             var day = dateObj.getUTCDate();
             var year = dateObj.getUTCFullYear();
 
-            data.date = year + "/" + month + "/" + day;
+            data.date = day + "/" + month + "/" + year ;
 
 
             delete data.media
