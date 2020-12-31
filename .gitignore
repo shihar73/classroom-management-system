@@ -1,2 +1,9 @@
 node_modules
 package-lock.json
+public/doc/assignments
+public/doc/notes
+public/doc/student-assignments
+public/images/notes
+public/images/student-profile
+public/images/turor-profile-img
+public/videos/notes
