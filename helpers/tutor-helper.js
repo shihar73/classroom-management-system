@@ -264,21 +264,26 @@ module.exports = {
             for (i = 0; i < Task.length; i++) {
                 console.log("gfhdfsh ====", i);
                 if (Task[i].note) {
+                    var note= await db.get().collection(collection.NOTES_COLLECTION).findOne({ _id: objectId(Task[i].note) })
+                    if(note){
 
-                    data.note[i] = await db.get().collection(collection.NOTES_COLLECTION).findOne({ _id: objectId(Task[i].note) })
+                        data.note[i]=note
+                    }
                 }
                 if (Task[i].assignmet) {
 
-                    data.assignment[i] = await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({ _id: objectId(Task[i].assignmet) })
+                    var assignmet= await db.get().collection(collection.ASSIGNMENT_COLLECTION).findOne({ _id: objectId(Task[i].assignmet) })
+                    if(assignmet){
+
+                        data.assignment[i] = assignmet
+                    }
                 }
                 console.log(data);
             }
-            console.log('========================dsfdsgds=gdsghfdt=hfthfffff========================');
-            console.log(data);
             resolve(data)
         })
     },
-    getattendance: () => {
+    getAttendance: () => {
         return new Promise(async (resolve, reject) => {
             var data = []
             let dateObj = new Date()
@@ -309,6 +314,48 @@ module.exports = {
             }
 
             console.log(data);
+            var prdata={
+                date:crDate,
+                attendance:data
+            }
+            // console.log('================================');
+            // console.log(prdata);
+            // console.log('===================================');
+            let atte = await db.get().collection(collection.ALL_ATTENDANCE_COLLECTION).findOne({date:crDate})
+            if (atte) {
+                db.get().collection(collection.ALL_ATTENDANCE_COLLECTION).updateOne({ date:crDate}, {
+                    $set: {
+                        attendance:data
+                    }
+                })
+
+            } else {
+
+                db.get().collection(collection.ALL_ATTENDANCE_COLLECTION).insertOne(prdata)
+            }
+
+            
+            resolve(data)
+        })
+        
+    },
+    getAllAttendance:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collection.ALL_ATTENDANCE_COLLECTION).find().toArray()
+            resolve(data)
+        })
+    },
+    addAnnouncement:(data)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ANNOUNCEMENT_COLLECTION).insertOne(data).then((data) => {
+                resolve(data.ops[0])
+            })
+        })
+        
+    },
+    getAnnouncement:()=>{
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.ANNOUNCEMENT_COLLECTION).find().toArray()
             resolve(data)
         })
 

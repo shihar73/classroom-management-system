@@ -5,6 +5,8 @@ module.exports = {
     STUDENT_ASSIGNMENT_COLLECTION:'studentAssignment',
     NOTES_COLLECTION:'notes',
     TASK_COLLECTION:'task',
-    ATTENDANCE_COLLECTION:'attendance'
+    ATTENDANCE_COLLECTION:'attendance',
+    ALL_ATTENDANCE_COLLECTION:'allattendance',
+    ANNOUNCEMENT_COLLECTION:'announcement',
     
 }

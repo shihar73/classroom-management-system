@@ -198,7 +198,6 @@ router.post("/save-assignments-mark/:id", (req, res) => {
 })
 
 router.get("/add-notes", verifyLogin, (req, res) => {
-    console.log(tutorData);
     tutorHelper.getNots().then((data) => {
         res.render('tutor/notes', { data, tutorData })
     })
@@ -210,7 +209,6 @@ router.post('/add-notes', (req, res) => {
     }
 
     tutorHelper.addNotes(req.body).then((data) => {
-        console.log(data);
         res.redirect('/tutor/add-notes')
         if (req.body.media === 'video') {
             let video = req.files.file
@@ -261,12 +259,54 @@ router.get('/attendance',verifyLogin, (req, res) => {let dateObj = new Date()
     var year = dateObj.getUTCFullYear();
     var crDate = day + "/" + month + "/" +year ;
 
-    tutorHelper.getattendance().then((data)=>{
+    tutorHelper.getAttendance().then((data)=>{
         res.render('tutor/attendance', {crDate, data, tutorData })
     })
 })
 
+router.get('/all-attendance',verifyLogin, (req, res) => {
+    
+    tutorHelper.getAllAttendance().then((data)=>{
+        console.log(data);
+        res.render('tutor/all-attendance', {data, tutorData })
+    })
+})
 
+router.get('/events',verifyLogin, (req, res) => {
+    
+    // tutorHelper.getAllAttendance().then((data)=>{
+    //     console.log(data);
+    // })
+    res.render('tutor/events', { tutorData })
+})
+
+router.get('/announcement',verifyLogin, (req, res) => {
+    
+    tutorHelper.getAnnouncement().then((data)=>{
+        console.log('----------------------------');
+        console.log(data);
+        res.render('tutor/announcement', {data, tutorData })
+    })
+})
+
+router.post('/announcement',verifyLogin, (req, res) => {
+
+    tutorHelper.addAnnouncement(req.body).then((data)=>{
+        res.redirect('/tutor/announcement')
+
+        if (req.body.media === 'video') {
+            let video = req.files.file
+            video.mv('./public/videos/announcement/' + data._id + ".mp4")
+        } else if (req.body.media === 'doc') {
+            let doc = req.files.file
+            doc.mv('./public/doc/announcement/' + data._id + ".pdf")
+        } else if (req.body.media === 'image') {
+            let img = req.files.file
+            img.mv('./public/images/announcement/' + data._id + ".jpg")
+        }
+
+    })
+})
 
 
 
