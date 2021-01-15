@@ -363,7 +363,7 @@
         left,
         right;
     width: 27rem;
-    height: 40rem;
+    padding-bottom: 25px;
     float: left;
     color: rgb(15, 1, 1);
 }
