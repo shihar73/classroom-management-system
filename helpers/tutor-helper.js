@@ -359,6 +359,29 @@ module.exports = {
             resolve(data)
         })
 
+    },
+    addEvent:(data)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.EVENT_COLLECTION).insertOne(data).then((data) => {
+                resolve(data.ops[0])
+            })
+        })
+    },
+    getAllEvents:()=>{
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.EVENT_COLLECTION).find().toArray()
+            resolve(data)
+        })
+
+    },
+    getHome:()=>{
+        return new Promise(async (resolve, reject) => {
+            let data={}
+            data.event = await db.get().collection(collection.EVENT_COLLECTION).find().toArray()
+            data.announcement = await db.get().collection(collection.ANNOUNCEMENT_COLLECTION).find().toArray()
+            
+            resolve(data)
+        })
     }
 
 
@@ -367,8 +390,3 @@ module.exports = {
 
 
 }
-
-
-
-
-

@@ -19,7 +19,7 @@
         </div>
         <div style="row">
             <div class="upload-button-wrap input-group" id="not-uplode">
-                <form class="upload-button-wrap" action="" method="POST" enctype="multipart/form-data"
+                <form class="upload-button-wrap" action="/tutor/add-event" method="POST" enctype="multipart/form-data"
                     style="padding-left: 30%; width:100%;">
                     <label for="">Topic</label>
                     <input required type="text" name="topic"
@@ -27,19 +27,34 @@
                         placeholder="Topic">
                     <br>
 
-                    <input required type="radio" id="other" name="media" value="image"
-                        style="display: block;float: left;">
-                    <label for="other"> Youtube</label>
+                    <input required type="radio" id="upload" name="media" value="image" style="display: block;float: left;">
+                    <label for="other"> Image</label>
                     <input type="radio" id="upload" name="media" value="video" style="display: block;float: left;">
                     <label for="female"> Video</label>
                     <input type="radio" id="upload" name="media" value="doc" style="display: block;float: left;">
                     <label for="other"> Document</label>
+                    <input type="radio" id="upload" name="media" value="none" style="display: block;float: left;">
+                    <label for="other"> None</label>
                     <br>
 
 
-                    <label class="upload-button" for="upload">File</label><br>
-                    <input required accept=".pdf, .png, .jpg, .jpeg, .mkv, .mp4, .avi, .mp3, .m4a, .wav" name="doc" id="upload" type="file" onclick="viewDoc(event)">
+                    <label class="upload-button" for="upload" onclick="fileinput()" >File</label><br>
+                    <input accept=".pdf, .png, .jpg, .jpeg, .mkv, .mp4, .avi, .mp3, .m4a, .wav" name="file" id="file-upload"
+                        type="file" >
                     <br>
+
+                    <h6 class="p-3">payment</h6>
+                    <input required onclick="free()" type="radio" id="upload" name="payment" value="free"
+                        style="display: block;float: left;">
+                    <label for="female"> free</label>
+                    <input onclick="paido()" type="radio" id="upload" name="payment" value="paid"
+                        style="display: block;float: left;">
+                    <label for="other"> paid</label>
+                    <input type="number" name="price"
+                        style=" height: 2.3rem;border: 3px solid;border-color: #1a015129;"
+                        id="paid" hidden>
+                    <br>
+
                     <textarea required style="display: block; ;border: 3px solid;border-color: #1a015129;" name="about"
                         id="" cols="30" rows="10">About</textarea>
                     <br>
@@ -70,6 +85,12 @@
                 <div class="col col-2" data-label="Name" style="max-width: 35%;">
                     <a href="" class="sd-name">{{this.topic}}</a>
                 </div>
+                 {{#iff this.media 'none'}}
+                 <div class="col col-3" data-label="" style="max-width: 35%;">
+                   <label for="">none</label>
+                </div>
+                {{/iff}}
+                
                 {{#iff this.media 'doc'}}
 
                 <div class="col col-3" data-label="" style="max-width: 35%;">
@@ -87,17 +108,17 @@
                 </div>
                 {{/iff}}
 
-                {{#iff this.media 'youtube'}}
+                {{#iff this.media 'image'}}
                 <div class="col col-3" data-label="" style="max-width: 35%;">
                     <a href="{{../url}}">
-                        <img src="/images/notes/YouTube.png" alt="image" class="note-sm-img">
+                        <img src="/images/event/{{../_id}}.jpg" alt="image" class="note-sm-img">
                     </a>
                 </div>
                 {{/iff}}
 
                 <div class="col col-4" data-label="" style="max-width: 20%;">
-                    <a id="note-add-btn" onclick="addClicked()" href="/tutor/set-task/{{this._id}}"
-                        class="btn btn-primary">Add</a>
+                    {{!-- <a id="note-add-btn" onclick="addClicked()" href="/tutor/set-task/{{this._id}}"
+                        class="btn btn-primary">Add</a> --}}
                     {{!-- <a id="note-cancel-btn" onclick="cancelClicked()" href="/tutor/remove-task/{{this._id}}"
                         class="btn btn-secondary" style="display: none;">Cancel</a> --}}
                     <a href="/tutor/delete-note/{{this._id}}"
@@ -109,3 +130,18 @@
         </ul>
     </div>
 </section>
+<script>
+    function paido() {
+        document.getElementById('paid').style.display = "block"
+        document.getElementById('paid').required = true
+    }
+    function free() {
+        document.getElementById('paid').style.display = "none"
+        document.getElementById('paid').hidden
+    }
+
+      const tutorImg = document.getElementById('file-upload');
+    function fileinput() {
+        tutorImg.click()
+    } 
+</script>

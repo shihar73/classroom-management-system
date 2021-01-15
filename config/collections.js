@@ -8,5 +8,6 @@ module.exports = {
     ATTENDANCE_COLLECTION:'attendance',
     ALL_ATTENDANCE_COLLECTION:'allattendance',
     ANNOUNCEMENT_COLLECTION:'announcement',
+    EVENT_COLLECTION:'event'
     
 }

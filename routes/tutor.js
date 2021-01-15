@@ -20,9 +20,12 @@ router.get('/', function (req, res, next) {
     }
 });
 router.get("/home", verifyLogin, (req, res) => {
-    console.log(tutorData);
     tutorData.login = req.session.tutorLoggedIn
-    res.render("tutor/tutor-home", { tutorData })
+    tutorHelper.getHome().then((data)=>{
+        console.log(data);
+
+        res.render("tutor/tutor-home", {data, tutorData })
+    })
 })
 
 router.post('/login', (req, res) => {
@@ -274,10 +277,10 @@ router.get('/all-attendance',verifyLogin, (req, res) => {
 
 router.get('/events',verifyLogin, (req, res) => {
     
-    // tutorHelper.getAllAttendance().then((data)=>{
-    //     console.log(data);
-    // })
-    res.render('tutor/events', { tutorData })
+    tutorHelper.getAllEvents().then((data)=>{
+        console.log("fsggsfsfgssfs==========",data);
+    res.render('tutor/events', {data, tutorData })
+    })
 })
 
 router.get('/announcement',verifyLogin, (req, res) => {
@@ -308,6 +311,26 @@ router.post('/announcement',verifyLogin, (req, res) => {
     })
 })
 
+router.post('/add-event',verifyLogin, (req, res) => {
+    
+
+    tutorHelper.addEvent(req.body).then((data)=>{
+        console.log(data);
+        res.redirect('/tutor/events')
+
+        if (req.body.media === 'video') {
+            let video = req.files.file
+            video.mv('./public/videos/events/' + data._id + ".mp4")
+        } else if (req.body.media === 'doc') {
+            let doc = req.files.file
+            doc.mv('./public/doc/events/' + data._id + ".pdf")
+        } else if (req.body.media === 'image') {
+            let img = req.files.file
+            img.mv('./public/images/events/' + data._id + ".jpg")
+        }
+
+    })
+})
 
 
 

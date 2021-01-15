@@ -4,14 +4,17 @@
         <a href="/tutor/announcement" class="home-div col-10 col-md-5 m-4">
             
                 <p class="text-center mt-3 font-weight-bold mb-4" style="font-size: 1.5rem; text-decoration: underline; color: black;">Annoucents</p>
-                <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> nothing</p>
+                {{#each data.announcement}}
+                <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> {{this.topic}}</p>
+                {{/each}}
             
         </a>
         <a href="/tutor/events" class="home-div col-10 col-md-5 m-4 ">
             
                 <p class="text-center mt-3 font-weight-bold mb-4" style="font-size: 1.5rem; text-decoration: underline; color: black;">Events</p>
-                <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> nothing</p>
-           
+                {{#each data.event}}
+                <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> {{this.topic}}</p>
+                {{/each}}
         </a>
         </div>
     </div>
