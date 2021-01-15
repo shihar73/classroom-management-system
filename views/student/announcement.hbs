@@ -1,0 +1,73 @@
+<style>
+    .ann_img {
+        width: 65%;
+        height: ;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    doc-button {
+        display: inline-block;
+        background-color: #944026;
+        border-radius: 10px;
+        border: 4px double #cccccc;
+        color: #ffffff;
+        text-align: center;
+        font-size: 20px;
+        padding: 8px;
+        width: 300px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+</style>
+<section class="session1">
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+            <div class="arrow-position">
+                <a href="/home"><i class='fas fa-angle-double-left ' style='font-size:25px'></i></a>
+            </div>
+            <div class="wrapper">
+                <div class="profile-card js-profile-card">
+<p>{{data._id}}</p>
+                    <div class="profile-card_cnt js-profile-cnt">
+                        <div class="profile-card__name">{{data.topic}}</div>
+                        <hr>
+                        {{#iff data.media 'image'}}
+                        <div class="ann_img">
+                            <img src="/images/announcement/{{data._id}}.jpg" alt="profile card">
+                        </div>
+                        {{/iff}}
+
+                        {{#iff data.media 'video'}}
+                        <div class="ann_img">
+                            <video width="" controls>
+                                <source src="/videos/announcement/{{data._id}}.mp4" type="video/mp4">
+                                <source src="mov_bbb.ogg" type="video/ogg">
+                            </video>
+                        </div>
+                        {{/iff}}
+
+                        {{#iff data.media 'doc'}}
+                        <div class="ann_img">
+                            <a href="/doc/announcement/{{data._id}}.pdf"> <label class="doc-button">Document</label></a>
+                        </div>
+                        {{/iff}}
+
+                        <hr>
+
+                        <div class="profile-card__txt"><strong>About</strong></div>
+                        <div class="profile-card__txt">{{data.about}}</div>
+
+                        <br>
+                        {{!-- <div class="container-login100-form-btn">
+                            <a href="/tutor/edit-student/{{student._id}}" class="edit100-form-btn">Edit</a>
+                        </div> --}}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dropDownSelect1"></div>
+</section>

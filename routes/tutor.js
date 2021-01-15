@@ -310,6 +310,13 @@ router.post('/announcement',verifyLogin, (req, res) => {
 
     })
 })
+router.get('/delete-announcement/:id', (req, res) => {
+    let Id = req.params.id
+    tutorHelper.deleteAnnouncement(Id).then(() => {
+        res.redirect('/tutor/announcement')
+    })
+})
+
 
 router.post('/add-event',verifyLogin, (req, res) => {
     

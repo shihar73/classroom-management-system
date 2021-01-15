@@ -27,12 +27,12 @@
                         placeholder="Topic">
                     <br>
 
-                    <input required type="radio" id="upload" name="media" value="image"
+                    <input required type="radio"  name="media" value="image"
                         style="display: block;float: left;">
                     <label for="other"> Image</label>
-                    <input type="radio" id="upload" name="media" value="video" style="display: block;float: left;">
+                    <input type="radio"  name="media" value="video" style="display: block;float: left;">
                     <label for="female"> Video</label>
-                    <input type="radio" id="upload" name="media" value="doc" style="display: block;float: left;">
+                    <input type="radio"  name="media" value="doc" style="display: block;float: left;">
                     <label for="other"> Document</label>
                     <br>
 
@@ -96,11 +96,11 @@
                 {{/iff}}
 
                 <div class="col col-4" data-label="" style="max-width: 20%;">
-                    <a id="note-add-btn" onclick="addClicked()" href="/tutor/set-task/{{this._id}}"
-                        class="btn btn-primary">Add</a>
+                    {{!-- <a id="note-add-btn" onclick="addClicked()" href="/tutor/set-task/{{this._id}}"
+                        class="btn btn-primary">Add</a> --}}
                     {{!-- <a id="note-cancel-btn" onclick="cancelClicked()" href="/tutor/remove-task/{{this._id}}"
                         class="btn btn-secondary" style="display: none;">Cancel</a> --}}
-                    <a href="/tutor/delete-note/{{this._id}}"
+                    <a href="/tutor/delete-announcement/{{this._id}}"
                         onclick="return confirm('Do you want delete {{this.topic}}?')"><i class='fas fa-trash '></i>
                     </a>
                 </div>

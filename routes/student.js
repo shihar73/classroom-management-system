@@ -23,7 +23,10 @@ router.get('/', function (req, res, next) {
 router.get('/home', verifyLogin, (req, res) => {
     studentData.login = req.session.studentLoggedIn
     console.log(studentData);
-    res.render('student/student-home', { studentData })
+    studentHelper.getHome().then((data)=>{
+
+        res.render('student/student-home', {data, studentData })
+    })
 })
 
 router.get('/login', (req, res) => {
@@ -155,6 +158,24 @@ router.post("/attendance",(req,res)=>{
     })
             
 })
+
+router.get("/announcement/:id", verifyLogin, (req, res) => {
+    console.log(req.params.id);
+    let Id = req.params.id
+    console.log(Id);
+    studentHelper.getAnnouncement(Id).then((data) => {
+        console.log(data);
+        res.render('student/announcement', {data, studentData })
+    })
+})
+
+router.get("/event/:id", verifyLogin, (req, res) => {
+    let Id = req.params.id
+    studentHelper.getAnnouncement(Id).then(() => {
+        res.redirect('/assignments')
+    })
+})
+
 
 
 

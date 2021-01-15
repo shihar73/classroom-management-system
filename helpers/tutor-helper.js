@@ -382,6 +382,13 @@ module.exports = {
             
             resolve(data)
         })
+    },
+    deleteAnnouncement:(Id)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ANNOUNCEMENT_COLLECTION).removeOne({ _id: objectId(Id) }).then((response) => {
+                resolve()
+            })
+        })
     }
 
 

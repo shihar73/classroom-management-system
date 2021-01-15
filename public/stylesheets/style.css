@@ -82,6 +82,13 @@
   padding-bottom: 40px;
   transition: all 0.3s;
 }
+.profile-card_cnt {
+  text-align: center;
+  padding: 15px 20px;
+  padding-bottom: 0px;
+  padding-bottom: 40px;
+  transition: all 0.3s;
+}
 
 .profile-card__name {
   font-weight: 700;

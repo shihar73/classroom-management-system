@@ -4,15 +4,21 @@
             <div class="home-div col-10 col-md-5 m-4">
                 <p class="text-center mt-3 font-weight-bold mb-4"
                     style="font-size: 1.5rem; text-decoration: underline; color: black;">Annoucents</p>
-                <a href="">
-                    <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> nothing</p>
+                {{#each data.announcement}}
+                <a href="/announcement/{{this._id}}">
+                    <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> {{this.topic}}</p>
                 </a>
+                <p>{{this._id}}</p>
+                {{/each}}
             </div>
             <div class="home-div col-10 col-md-5 m-4 ">
                 <p class="text-center mt-3 font-weight-bold mb-4"
                     style="font-size: 1.5rem; text-decoration: underline; color: black;">Events</p>
-                <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> nothing</p>
-            </div>
+                {{#each data.event}}
+                <a href="/event/{{this._id}}">
+                    <p style="font-size: 1rem; color: black;"><span class="fas fa-asterisk"> </span> {{this.topic}}</p>
+                </a>
+                {{/each}}</div>
         </div>
     </div>
 
