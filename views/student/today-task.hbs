@@ -178,18 +178,18 @@
 
             },
             method: 'post',
-            success: (responce) => {
-                console.log(responce)
-                if (responce === 'doc') {
-                    location.href = '/tutor/doc-note/' + noteId
-                } else if (responce === 'video') {
-                    location.href = '/tutor/video-note/' + noteId
+                success: (responce) => {
+                    console.log(responce)
+                    if (responce === 'doc') {
+                        location.href = '/tutor/doc-note/' + noteId
+                    } else if (responce === 'video') {
+                        location.href = '/tutor/video-note/' + noteId
+                    }
                 }
-            }
 
         })
 
-    }
+    }           
 
 
 

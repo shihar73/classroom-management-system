@@ -1,3 +1,4 @@
+const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 var studentHelper = require('../helpers/student-helper')
@@ -159,19 +160,20 @@ router.post("/attendance",(req,res)=>{
             
 })
 
-router.get("/announcement/:id", verifyLogin, (req, res) => {
+
+
+router.get("/anno/:id", verifyLogin, (req, res) => {
     console.log(req.params.id);
-    let Id = req.params.id
-    console.log(Id);
-    studentHelper.getAnnouncement(Id).then((data) => {
+    
+    studentHelper.getAnnouncement(req.params.id).then((data) => {
         console.log(data);
         res.render('student/announcement', {data, studentData })
     })
-})
+})  
 
 router.get("/event/:id", verifyLogin, (req, res) => {
     let Id = req.params.id
-    studentHelper.getAnnouncement(Id).then(() => {
+    studentHelper.getEvent(Id).then(() => {
         res.redirect('/assignments')
     })
 })
