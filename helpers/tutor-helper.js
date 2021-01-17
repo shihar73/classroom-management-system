@@ -389,6 +389,13 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    deleteEvent:(Id)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.EVENT_COLLECTION).removeOne({ _id: objectId(Id) }).then((response) => {
+                resolve()
+            })
+        })
     }
 
 
