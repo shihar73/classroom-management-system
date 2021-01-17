@@ -52,11 +52,11 @@
                     <label for="other"> paid</label>
                     <input type="number" name="price"
                         style=" height: 2.3rem;border: 3px solid;border-color: #1a015129;"
-                        id="paid" hidden>
+                        id="paid" >
                     <br>
 
                     <textarea required style="display: block; ;border: 3px solid;border-color: #1a015129;" name="about"
-                        id="" cols="30" rows="10">About</textarea>
+                        id="" cols="30" rows="10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</textarea>
                     <br>
                     <input type="submit" class="save100-form-btn ml-5" value="save">
                 </form>
@@ -94,7 +94,7 @@
                 {{#iff this.media 'doc'}}
 
                 <div class="col col-3" data-label="" style="max-width: 35%;">
-                    <a href="/tutor/doc-note/{{../_id}}">
+                    <a href="">
                         <i class="fa fa-file-pdf-o"></i>
                     </a>
                 </div>
@@ -102,7 +102,7 @@
 
                 {{#iff this.media 'video'}}
                 <div class="col col-3" data-label="" style="max-width: 35%;">
-                    <a href="/tutor/video-note/{{../_id}}">
+                    <a href="">
                         <i class="fa fa-file-video-o"></i>
                     </a>
                 </div>
@@ -111,7 +111,7 @@
                 {{#iff this.media 'image'}}
                 <div class="col col-3" data-label="" style="max-width: 35%;">
                     <a href="{{../url}}">
-                        <img src="/images/event/{{../_id}}.jpg" alt="image" class="note-sm-img">
+                        <img src="/images/events/{{../_id}}.jpg" alt="image" class="note-sm-img">
                     </a>
                 </div>
                 {{/iff}}
@@ -132,12 +132,14 @@
 </section>
 <script>
     function paido() {
+        console.log("DASfsdfsdsdfsfsdfsfsdf")
         document.getElementById('paid').style.display = "block"
         document.getElementById('paid').required = true
     }
     function free() {
+        console.log("DASfsdfsdsdfsfsdfsfsdf")
         document.getElementById('paid').style.display = "none"
-        document.getElementById('paid').hidden
+        document.getElementById('paid').required =false
     }
 
       const tutorImg = document.getElementById('file-upload');

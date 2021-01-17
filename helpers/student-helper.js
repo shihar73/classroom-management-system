@@ -161,8 +161,13 @@ module.exports = {
     },
     getAnnouncement:(Id)=>{
         return new Promise(async (resolve, reject) => {
-            console.log("==========================",Id);
             let data = await db.get().collection(collection.ANNOUNCEMENT_COLLECTION).findOne({ _id: objectId(Id) })
+            resolve(data)
+        })
+    },
+    getEvent:(Id)=>{
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.EVENT_COLLECTION).findOne({ _id: objectId(Id) })
             resolve(data)
         })
     }

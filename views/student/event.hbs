@@ -54,16 +54,23 @@
                         </div>
                         {{/iff}}
 
+                        {{#iff data.media 'none'}}
+                        <div class="ann_img">
+                            <a href="/doc/announcement/{{../data._id}}.pdf"> None</i></a>
+                        </div>
+                        {{/iff}}
+
                         <hr>
 
                         <div class="profile-card__txt"><strong>About</strong></div>
                         <div class="profile-card__txt">{{data.about}}</div>
 
                         <br>
-                        {{!-- <div class="container-login100-form-btn">
-                            <a href="/tutor/edit-student/{{student._id}}" class="edit100-form-btn">Edit</a>
-                        </div> --}}
-
+                        {{#iff data.payment "paid"}}
+                        <div class="container-login100-form-btn">
+                            <a href="" class="edit100-form-btn">Pay</a>
+                        </div>
+                        {{/iff}}
 
                     </div>
                 </div>

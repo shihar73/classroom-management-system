@@ -173,8 +173,9 @@ router.get("/anno/:id", verifyLogin, (req, res) => {
 
 router.get("/event/:id", verifyLogin, (req, res) => {
     let Id = req.params.id
-    studentHelper.getEvent(Id).then(() => {
-        res.redirect('/assignments')
+    studentHelper.getEvent(Id).then((data) => {
+        console.log(data);
+        res.render('student/event', {data, studentData })
     })
 })
 
